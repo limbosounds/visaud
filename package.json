@@ -1,0 +1,61 @@
+{
+  "name": "visaud",
+  "version": "0.0.1",
+  "description": "Audio visualizer",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"No tests\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/limbosounds/visaud.git"
+  },
+  "keywords": [
+    "audio",
+    "visualizer"
+  ],
+  "author": "limbo sounds",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/limbosounds/visaud/issues"
+  },
+  "homepage": "https://github.com/limbosounds/visaud#readme",
+  "dependencies": {
+    "mobx": "^6.12.3",
+    "mobx-react": "^9.1.1",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@theadmasters/version-manager": "^0.2.0",
+    "@types/html-webpack-plugin": "^3.2.9",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
+    "@types/react-helmet": "^6.1.11",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/superagent": "^8.1.6",
+    "@types/webpack": "^5.28.5",
+    "css-loader": "^7.1.1",
+    "css-minimizer-webpack-plugin": "^6.0.0",
+    "html-loader": "^5.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "ignore-loader": "^0.1.2",
+    "mini-css-extract-plugin": "^2.9.0",
+    "mocha": "^10.4.0",
+    "sass": "1.75.0",
+    "sass-loader": "^14.2.1",
+    "shipit-cli": "^5.3.0",
+    "shipit-deploy": "^5.3.0",
+    "should": "^13.2.3",
+    "source-map-loader": "^5.0.0",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  }
+}
