@@ -1,6 +1,8 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 
+import "@sounds.of.limbo/extensions/dist/Number"
+
 import App from "App"
 
 export interface ProviderProps {

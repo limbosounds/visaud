@@ -1,0 +1,47 @@
+@import "styles/vars"
+
+div.c-player
+	background: rgba(black, .72)
+	width: 720px
+	height: 60px
+	border-radius: 6px
+	color: white
+	padding: 0px 20px
+	display: flex
+	align-items: center
+	justify-content: space-between
+	margin: 0 auto
+
+	> i
+		font-size: 24px
+		flex-grow: 0
+		flex-shrink: 0
+		margin-right: 20px
+
+	div.progress-n-timing
+		flex-grow: 1
+		flex-shrink: 1
+		padding-top: 15px
+		div.progress
+			position: relative
+			margin-bottom: 10px
+
+			span
+				+pos(absolute, 0, 0)
+				width: 100%
+				height: 4px
+				&.total
+					background: rgba(white, .5)
+
+				&.current
+					background: white
+			
+		div.timing
+			display: flex
+			align-items: center
+			justify-content: space-between
+
+			span
+				line-height: 10px
+				font-size: 12px
+				font-weight: 700

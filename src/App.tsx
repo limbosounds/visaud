@@ -6,7 +6,7 @@ import "styles/fonts"
 import "styles/main"
 import "styles/uni"
 
-import Main from "stores/Main"
+import EditorView from "views/Editor"
 
 export interface AppProps {
 
@@ -22,9 +22,7 @@ class App
 extends React.Component<AppProps, AppState> {
 	render() {
 		return <>
-			<h1>
-				Hello, {Main.projectName}
-			</h1>
+			<EditorView />
 		</>
 	}
 }
