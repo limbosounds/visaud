@@ -5,6 +5,7 @@ import { observer } from "mobx-react"
 import "styles/components/player"
 import SoundSource from "stores/SoundSource"
 import SoundProcessor from "stores/SoundProcessor"
+import Scene from "stores/Scene"
 
 export interface PlayerProps {
 
@@ -76,9 +77,11 @@ extends React.Component<PlayerProps, PlayerState> {
 					ref={r => this.source = r}
 					src={SoundSource.objectUrl}
 					muted={false}
-					// controls
+					controls
 					onLoadedMetadata={this.handleLoad}
 					onTimeUpdate={this.handleTimeUpdate}
+					onPlay={Scene.startRender}
+					onPause={Scene.stopRender}
 				/>,
 				document.body,
 			)}

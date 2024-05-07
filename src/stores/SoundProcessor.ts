@@ -41,6 +41,9 @@ class SoundProcessorStore {
 		const source = this._context.createMediaElementSource(element)
 		source.connect(this._analyser)
 		source.connect(this._context.destination)
+
+		this._waveform = new Float32Array(this._analyser.fftSize)
+		this._freq = new Float32Array(this._analyser.fftSize)
 	}
 
 	updateWaveform = () => {
