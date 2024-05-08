@@ -11,10 +11,12 @@ class SceneStore {
 	private context
 		: CanvasRenderingContext2D
 
-	private render = () => {
-		const { analyser, waveform, updateFreq, updateWaveform } = SoundProcessor
-		updateWaveform()
-		updateFreq()
+	private render = (
+		singleFrame: boolean = false,
+	) => {
+		SoundProcessor.updateWaveform()
+		SoundProcessor.updateFreq()
+		const { analyser, waveform } = SoundProcessor
 
 		const bufferLength = analyser.fftSize
 
@@ -40,7 +42,8 @@ class SceneStore {
 		this.context.lineTo(width, height / 2)
 		this.context.stroke()
 
-		this.frame = requestAnimationFrame(this.render)
+		if (!singleFrame)
+			this.frame = requestAnimationFrame(() => this.render())
 	}
 
 	useCanvas = (
@@ -54,11 +57,15 @@ class SceneStore {
 	}
 
 	startRender = () => {
-		this.frame = requestAnimationFrame(this.render)
+		this.frame = requestAnimationFrame(() => this.render(false))
 	}
 
 	stopRender = () => {
 		cancelAnimationFrame(this.frame)
+	}
+
+	updateFrame = () => {
+		this.render(true)
 	}
 }
 

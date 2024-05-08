@@ -40,6 +40,8 @@ extends React.Component<PlayerProps, PlayerState> {
 		this.setState({
 			duration: event.currentTarget.duration,
 		})
+
+		Scene.updateFrame()
 	}
 
 	handleTimeUpdate = (
@@ -48,6 +50,8 @@ extends React.Component<PlayerProps, PlayerState> {
 		this.setState({
 			currentTime: event.currentTarget.currentTime,
 		})
+		
+		Scene.updateFrame()
 	}
 
 	play = () => {
