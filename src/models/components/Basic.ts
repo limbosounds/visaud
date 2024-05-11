@@ -13,3 +13,15 @@ export const ComponentDimensionsModel = types
 		width: makeNumberModel("int"),
 		height: makeNumberModel("int"),
 	})
+
+export const defaultDimensions = (
+	width: number,
+	height: number,
+): IComponentDimensionsSnapshotIn => {
+	return {
+		top: { value: "0" },
+		left: { value: "0" },
+		width: { value: width.toString() },
+		height: { value: height.toString() },
+	}
+}

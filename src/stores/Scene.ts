@@ -1,5 +1,6 @@
 import {} from "mobx"
 import SoundProcessor from "./SoundProcessor"
+import { VisualModel } from "models/components"
 
 class SceneStore {
 	private frame
@@ -16,35 +17,22 @@ class SceneStore {
 	) => {
 		SoundProcessor.updateWaveform()
 		SoundProcessor.updateFreq()
-		const { analyser, waveform } = SoundProcessor
-
-		const bufferLength = analyser.fftSize
 
 		const { width, height } = this.canvas
 		this.context.clearRect(0, 0, width, height)
 		this.context.fillStyle = "rgb(0, 0, 0)"
 		this.context.fillRect(0, 0, width, height)
-		this.context.lineWidth = 2
-		this.context.strokeStyle = "rgb(255, 0, 0)"
-		this.context.beginPath()
-
-		const slliceWidth = width / bufferLength
-		let x = 0
-		for (let i = 0; i < bufferLength; i++) {
-			const v = waveform[i] * 50
-			const y = height / 2 + v
-			if (i == 0)
-				this.context.moveTo(x, y)
-			else
-				this.context.lineTo(x, y)
-			x += slliceWidth
-		}
-		this.context.lineTo(width, height / 2)
-		this.context.stroke()
+		
+		this.visual.components.forEach(component => {
+			component.render(this.context, SoundProcessor.analyser.fftSize)
+		})
 
 		if (!singleFrame)
 			this.frame = requestAnimationFrame(() => this.render())
 	}
+
+	readonly visual
+		= VisualModel.create({})
 
 	useCanvas = (
 		canvas: null | HTMLCanvasElement,

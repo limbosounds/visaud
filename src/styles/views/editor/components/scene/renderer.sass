@@ -1,8 +1,17 @@
 @import "styles/vars"
 
-canvas.c-editor-scene-renderer
-	display: block
-	width: 480px
-	height: 240px
-	background: red
-	margin: 20px auto
+div.c-editor-scene-renderer
+	max-width: 1920px
+	margin-top: 20px
+	div.inner-wrapper
+		width: 100%
+		padding-top: calc(100% / 16 * 9)
+		position: relative
+		background: blue
+
+		canvas
+			display: block
+			+pos(absolute, 0, 0, 0, 0)
+			width: 100%
+			heigth: 100%
+			background: red

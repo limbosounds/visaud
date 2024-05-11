@@ -11,6 +11,7 @@ extends SnapshotIn<typeof CWaveformModel> {}
 
 export const CWaveformModel = types
 	.model("Component::Waveform", {
+		type: types.literal("waveform"),
 		dimensions: ComponentDimensionsModel,
 		color: ColorModel,
 		heaviness: makeNumberModel("int", 1)
@@ -31,10 +32,10 @@ export const CWaveformModel = types
 				context.beginPath()
 
 				const sliceWidth = width / bufferLength
-				let x = 0
+				let x = self.dimensions.left.numeric
 				for (let i = 0; i < bufferLength; i++) {
 					const v = waveform[i] * halfHeight
-					const y = halfHeight + v
+					const y = self.dimensions.top.numeric + halfHeight + v
 					if (i == 0)
 						context.moveTo(x, y)
 					else

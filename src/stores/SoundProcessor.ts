@@ -47,11 +47,11 @@ class SoundProcessorStore {
 	}
 
 	updateWaveform = () => {
-		this._analyser.getFloatTimeDomainData(this._waveform)
+		this._analyser?.getFloatTimeDomainData(this._waveform)
 	}
 
 	updateFreq = () => {
-		this._analyser.getFloatFrequencyData(this._freq)
+		this._analyser?.getFloatFrequencyData(this._freq)
 	}
 }
 

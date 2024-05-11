@@ -24,3 +24,12 @@ export const ColorModel = types
 			}
 		}
 	})
+
+export const defaultColor = (): IColorSnapshotIn => {
+	return {
+		red: { value: "255" },
+		green: { value: "255" },
+		blue: { value: "255" },
+		opacity: { value: "1" },
+	}
+}
