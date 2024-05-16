@@ -1,0 +1,25 @@
+@import "styles/vars"
+
+div.c-editor-components
+	background: rgba(white, .12)
+	padding: 15px 10px
+	height: 100%
+
+	> *
+		border-radius: 3px
+
+	.add-button
+		padding: 20px
+		display: flex
+		align-items: center
+		justify-content: center
+		box-shadow: inset 0 0 0 2px rgba(white, .12)
+		background: rgba($colorDark, .12)
+		cursor: pointer
+		transform: translateZ(0)
+		+childSpaceRight(5px)
+		+transition(background, box-shadow)
+
+		&:hover
+			background: rgba($colorDark, .24)
+			box-shadow: inset 0 0 0 2px rgba(white, .24)

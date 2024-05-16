@@ -1,7 +1,10 @@
 import { types, Instance, SnapshotIn } from "mobx-state-tree"
+import { v4 as uuid } from "uuid"
+
+import SoundProcessor from "stores/SoundProcessor"
+
 import { ComponentDimensionsModel } from "./Basic"
 import { ColorModel } from "models/primitives/Color"
-import SoundProcessor from "stores/SoundProcessor"
 import { makeNumberModel } from "models/primitives/Number"
 
 export interface ICWaveform
@@ -11,6 +14,7 @@ extends SnapshotIn<typeof CWaveformModel> {}
 
 export const CWaveformModel = types
 	.model("Component::Waveform", {
+		id: uuid(),
 		type: types.literal("waveform"),
 		dimensions: ComponentDimensionsModel,
 		color: ColorModel,
