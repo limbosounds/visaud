@@ -23,13 +23,18 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 				<h1>
 					Components
 				</h1>
-				{Scene.visual.components.map(component => {
-					return <div className="component">
-						<h2>
-							{component.type}
-						</h2>
-					</div>
-				})}
+				<div className="ec-components-list">
+					{Scene.visual.components.map(component => {
+						return <div
+							key={component.id}
+							className="ec-component u-paper"
+						>
+							<h2>
+								{component.type}
+							</h2>
+						</div>
+					})}
+				</div>
 
 				<div
 					className="add-button"

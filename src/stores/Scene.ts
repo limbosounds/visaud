@@ -3,6 +3,18 @@ import SoundProcessor from "./SoundProcessor"
 import { VisualModel } from "models/components"
 
 class SceneStore {
+	private fps
+		: number
+		= 60
+
+	private interval
+		: number
+		= 1000 / this.fps
+
+	private lastUpdate?
+		: number
+		= undefined
+
 	private frame
 		: number
 
@@ -12,9 +24,7 @@ class SceneStore {
 	private context
 		: CanvasRenderingContext2D
 
-	private render = (
-		singleFrame: boolean = false,
-	) => {
+	private renderLoop = () => {
 		SoundProcessor.updateWaveform()
 		SoundProcessor.updateFreq()
 
@@ -26,9 +36,27 @@ class SceneStore {
 		this.visual.components.forEach(component => {
 			component.render(this.context, SoundProcessor.analyser.fftSize)
 		})
+	}
 
-		if (!singleFrame)
-			this.frame = requestAnimationFrame(() => this.render())
+	private render = (
+		timestamp: number,
+		singleFrame: boolean = false,
+	) => {
+		if (singleFrame) {
+			this.renderLoop()
+		} else {
+			if (!this.lastUpdate)
+				this.lastUpdate = timestamp
+
+			const delta = timestamp - this.lastUpdate
+
+			if (delta > this.interval) {
+				this.lastUpdate = timestamp - (delta % this.interval)
+				this.renderLoop()
+			}
+
+			this.frame = requestAnimationFrame(this.render)
+		}
 	}
 
 	readonly visual
@@ -45,7 +73,7 @@ class SceneStore {
 	}
 
 	startRender = () => {
-		this.frame = requestAnimationFrame(() => this.render(false))
+		this.frame = requestAnimationFrame(this.render)
 	}
 
 	stopRender = () => {
@@ -53,7 +81,7 @@ class SceneStore {
 	}
 
 	updateFrame = () => {
-		this.render(true)
+		this.render(0, true)
 	}
 }
 

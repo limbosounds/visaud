@@ -30,6 +30,6 @@ export const defaultColor = (): IColorSnapshotIn => {
 		red: { value: "255" },
 		green: { value: "255" },
 		blue: { value: "255" },
-		opacity: { value: "1" },
+		opacity: { value: "100" },
 	}
 }

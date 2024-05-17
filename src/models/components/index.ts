@@ -2,6 +2,7 @@ import { defaultColor } from "models/primitives/Color"
 import { CWaveformModel, ICWaveform } from "./Waveform"
 import { types, Instance, SnapshotIn } from "mobx-state-tree"
 import { defaultDimensions } from "./Basic"
+import Scene from "stores/Scene"
 
 export type VisualComponent =
 	| ICWaveform
@@ -36,6 +37,7 @@ export const VisualModel = types
 						}))
 					break
 				}
+				Scene.updateFrame()
 			},
 			removeComponent: (
 				component: VisualComponent,

@@ -14,7 +14,7 @@ extends SnapshotIn<typeof CWaveformModel> {}
 
 export const CWaveformModel = types
 	.model("Component::Waveform", {
-		id: uuid(),
+		id: types.optional(types.string, () => uuid()),
 		type: types.literal("waveform"),
 		dimensions: ComponentDimensionsModel,
 		color: ColorModel,
