@@ -1,5 +1,7 @@
-import { types, Instance, SnapshotIn } from "mobx-state-tree"
+import { reaction } from "mobx"
+import { types, Instance, SnapshotIn, addDisposer } from "mobx-state-tree"
 import { makeNumberModel } from "models/primitives/Number"
+import Scene from "stores/Scene"
 
 export interface IComponentDimensions
 extends Instance<typeof ComponentDimensionsModel> {}
@@ -10,8 +12,18 @@ export const ComponentDimensionsModel = types
 	.model("ComponentDimensions", {
 		top: makeNumberModel("float"),
 		left: makeNumberModel("float"),
-		width: makeNumberModel("int"),
-		height: makeNumberModel("int"),
+		width: makeNumberModel("int", 1),
+		height: makeNumberModel("int", 1),
+	})
+	.actions(self => {
+		return {
+			afterCreate: () => {
+				addDisposer(self, reaction(
+					() => `${self.top.numeric} ${self.left.numeric} ${self.width.numeric} ${self.height.numeric}`,
+					() => Scene.updateFrame()
+				))
+			}
+		}
 	})
 
 export const defaultDimensions = (

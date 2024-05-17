@@ -20,7 +20,15 @@ export const VisualModel = types
 			types.union(
 				CWaveformModel,
 			)
-		)
+		),
+		highlighted: types.maybe(types.string),
+	})
+	.views(self => {
+		return {
+			get highlightedComponent() {
+				return self.components.find(component => component.id == self.highlighted)
+			}
+		}
 	})
 	.actions(self => {
 		return {
@@ -45,5 +53,13 @@ export const VisualModel = types
 				// detach(component)
 				self.components.remove(component)
 			},
+			highlight: (
+				id: string,
+			) => {
+				self.highlighted = id
+			},
+			unhighlight: () => {
+				self.highlighted = undefined
+			}
 		}
 	})

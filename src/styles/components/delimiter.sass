@@ -1,0 +1,21 @@
+@import "styles/vars"
+
+div.c-delimiter
+	display: flex
+	align-items: center
+	justify-content: space-between
+
+	&:before, &:after
+		content: ""
+		display: block
+		flex-grow: 1
+		flex-shrink: 1
+		height: 1px
+		background: white
+		opacity: .12
+
+	div.dl-content
+		flex-grow: 0
+		flex-shrink: 0
+		padding: 0 10px
+		font-size: 14px

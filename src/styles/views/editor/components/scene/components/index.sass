@@ -1,4 +1,5 @@
 @import "styles/vars"
+@import "styles/uni"
 
 div.c-editor-components
 	background: rgba(white, .12)
@@ -8,7 +9,43 @@ div.c-editor-components
 	h1
 		margin-bottom: 18px
 		font-size: 30px
+		line-height: 30px
 		font-weight: 700
+		display: flex
+		align-items: center
+		justify-content: flex-start
+		text-align: left
+		text-transform: capitalize
+		i
+			font-size: 20px
+			width: 30px
+			height: 30px
+			display: flex
+			align-items: center
+			justify-content: center
+			margin-right: 10px
+			cursor: pointer
+			border-radius: 3px
+			+transition(background)
+
+			&:before
+				+transition(transform)
+
+			&:hover
+				background: rgba($colorDark, .24)
+				&:before
+					transform: translateX(-5px)
+
+	div.ec-component-manager
+		+childSpaceBottom(15px)
+		section
+			@extend .u-paper
+			background: rgba(white, .12)
+			padding: 15px
+			padding-top: 10px
+
+			div.c-delimiter
+				margin-bottom: 10px
 
 	div.ec-components-list
 		margin-bottom: 20px
@@ -17,6 +54,29 @@ div.c-editor-components
 		div.ec-component
 			background: rgba(white, .12)
 			padding: 15px
+
+			header
+				display: flex
+				align-items: center
+				justify-content: space-between
+
+				div.name
+					flex-grow: 1
+					flex-shrink: 1
+					min-width: 0
+					margin-right: 15px
+
+					h2
+						font-size: 16px
+						font-style: italic
+						font-variation-settings: "wght" 700
+						text-transform: capitalize
+						margin-bottom: 5px
+
+					p
+						font-size: 12px
+						+toe
+
 
 	.add-button
 		padding: 20px

@@ -62,6 +62,14 @@ class SceneStore {
 	readonly visual
 		= VisualModel.create({})
 
+	get width(): number {
+		return this.canvas.width
+	}
+
+	get height(): number {
+		return this.canvas.height
+	}
+
 	useCanvas = (
 		canvas: null | HTMLCanvasElement,
 	) => {
