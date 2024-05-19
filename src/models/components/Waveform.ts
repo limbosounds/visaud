@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid"
 
 import SoundProcessor from "stores/SoundProcessor"
 
-import { ComponentDimensionsModel } from "./Basic"
+import { ComponentDimensionsModel, renderBounds } from "./Basic"
 import { ColorModel } from "models/primitives/Color"
 import { makeNumberModel } from "models/primitives/Number"
 
@@ -25,6 +25,7 @@ export const CWaveformModel = types
 			render: (
 				context: CanvasRenderingContext2D,
 				bufferLength: number,
+				isHighlighted: boolean,
 			) => {
 				const { waveform } = SoundProcessor
 				const width = self.dimensions.width.numeric
@@ -49,6 +50,9 @@ export const CWaveformModel = types
 
 				context.lineTo(width, halfHeight)
 				context.stroke()
+
+				if (isHighlighted)
+					renderBounds(context, self.dimensions)
 			}
 		}
 	})

@@ -3,17 +3,22 @@
 div.c-editor-scene-renderer
 	flex-grow: 1
 	flex-shrink: 1
-	max-width: calc(60vh / 9 * 16)
+	max-width: calc(80vh / 9 * 16)
 	
-	div.inner-wrapper
+	div.outer-wrapper
 		width: 100%
 		padding-top: calc(100% / 16 * 9)
 		position: relative
 		background: blue
 
-		canvas
-			display: block
+		div.inner-wrapper
 			+pos(absolute, 0, 0, 0, 0)
-			width: 100%
-			heigth: 100%
-			background: red
+			display: flex
+			align-items: center
+			justify-content: center
+			overflow: hidden
+
+			canvas
+				display: block
+				background: red
+				transform-origin: 50% 50%

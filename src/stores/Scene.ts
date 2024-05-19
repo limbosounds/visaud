@@ -34,7 +34,11 @@ class SceneStore {
 		this.context.fillRect(0, 0, width, height)
 		
 		this.visual.components.forEach(component => {
-			component.render(this.context, SoundProcessor.analyser.fftSize)
+			component.render(
+				this.context,
+				SoundProcessor.analyser.fftSize,
+				this.visual.highlighted == component.id,
+			)
 		})
 	}
 
@@ -62,12 +66,16 @@ class SceneStore {
 	readonly visual
 		= VisualModel.create({})
 
-	get width(): number {
-		return this.canvas.width
-	}
+	readonly width
+		: number
+		= 1920
 
-	get height(): number {
-		return this.canvas.height
+	readonly height
+		: number
+		= 1080
+
+	get ratio() {
+		return this.width / this.height
 	}
 
 	useCanvas = (

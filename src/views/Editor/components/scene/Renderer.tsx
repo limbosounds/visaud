@@ -9,13 +9,19 @@ export interface EditorSceneRendererProps {
 }
 
 export interface EditorSceneRendererState {
-
+	scale: number
 }
 
 @observer
 export default
 class EditorSceneRenderer
 extends React.Component<EditorSceneRendererProps, EditorSceneRendererState> {
+	state
+		: Readonly<EditorSceneRendererState>
+		= {
+			scale: 1
+		}
+		
 	canvas
 		: null | HTMLCanvasElement
 
@@ -32,22 +38,37 @@ extends React.Component<EditorSceneRendererProps, EditorSceneRendererState> {
 		if (!this.canvas)
 			return
 
-		this.canvas.width = this.canvas.parentElement?.offsetWidth!
-		this.canvas.height = this.canvas.parentElement?.offsetHeight!
+		const {
+			offsetHeight: parentHeight = 0,
+			offsetWidth: parentWidth = 0
+		} = this.canvas.parentElement ?? {}
 
-		Scene.updateFrame()
+		this.setState({
+			scale: parentWidth / parentHeight >= Scene.ratio
+				// scale by width
+				? parentWidth / Scene.width
+				// scale by height
+				: parentHeight / Scene.height,
+		})
 	}
 
 	render() {
 		return <>
 			<div className="c-editor-scene-renderer">
-				<div className="inner-wrapper">
-					<canvas
-						ref={r => {
-							Scene.useCanvas(r)
-							this.canvas = r
-						}}
-					/>
+				<div className="outer-wrapper">
+					<div className="inner-wrapper">
+						<canvas
+							width={1920}
+							height={1080}
+							style={{
+								transform: `scale(${this.state.scale}) translateZ(0)`
+							}}
+							ref={r => {
+								Scene.useCanvas(r)
+								this.canvas = r
+							}}
+						/>
+					</div>
 				</div>
 			</div>
 		</>

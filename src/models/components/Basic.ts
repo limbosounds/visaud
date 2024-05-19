@@ -37,3 +37,24 @@ export const defaultDimensions = (
 		height: { value: height.toString() },
 	}
 }
+
+export const renderBounds = (
+	context: CanvasRenderingContext2D,
+	dimensions: IComponentDimensions,
+) => {
+	context.save()
+
+	context.strokeStyle = "rgb(0, 255, 255)"
+	context.lineWidth = 1
+	context.shadowColor = "cyan"
+	context.shadowBlur = 3
+
+	context.strokeRect(
+		dimensions.left.numeric,
+		dimensions.top.numeric,
+		dimensions.width.numeric,
+		dimensions.height.numeric,
+	)
+
+	context.restore()
+}

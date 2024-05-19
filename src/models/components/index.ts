@@ -57,9 +57,11 @@ export const VisualModel = types
 				id: string,
 			) => {
 				self.highlighted = id
+				Scene.updateFrame()
 			},
 			unhighlight: () => {
 				self.highlighted = undefined
+				Scene.updateFrame()
 			}
 		}
 	})
