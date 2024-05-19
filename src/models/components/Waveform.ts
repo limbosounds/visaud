@@ -48,7 +48,7 @@ export const CWaveformModel = types
 					x += sliceWidth
 				}
 
-				context.lineTo(width, halfHeight)
+				context.lineTo(self.dimensions.left.numeric + width, self.dimensions.top.numeric + halfHeight)
 				context.stroke()
 
 				if (isHighlighted)

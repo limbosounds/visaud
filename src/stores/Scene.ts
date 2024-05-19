@@ -25,9 +25,6 @@ class SceneStore {
 		: CanvasRenderingContext2D
 
 	private renderLoop = () => {
-		SoundProcessor.updateWaveform()
-		SoundProcessor.updateFreq()
-
 		const { width, height } = this.canvas
 		this.context.clearRect(0, 0, width, height)
 		this.context.fillStyle = "rgb(0, 0, 0)"
@@ -56,6 +53,8 @@ class SceneStore {
 
 			if (delta > this.interval) {
 				this.lastUpdate = timestamp - (delta % this.interval)
+				SoundProcessor.updateWaveform()
+				SoundProcessor.updateFreq()
 				this.renderLoop()
 			}
 

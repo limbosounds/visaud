@@ -1,0 +1,92 @@
+@import "styles/vars"
+
+section.c-component-dimensions-size
+	+childSpaceBottom(10px)
+	div.dims-row
+		display: flex
+		align-items: stretch
+		justify-content: space-between
+
+		div.c-small-button
+			flex-grow: 0
+			flex-shrink: 0
+			margin-left: 5px
+
+section.c-component-dimensions-position
+	div.dimp-wrapper
+		+childSpaceRight(10px)
+		display: flex
+		align-items: flex-start
+		justify-content: space-between
+
+		div.dimp-column
+			&.box-wrapper
+				flex-grow: 0
+				flex-shrink: 0
+				padding: 4px 5px 5px 5px
+
+			&:not(.box-wrapper)
+				flex-grow: 1
+				flex-shrink: 1
+				min-width: 0
+
+			&.inputs-wrapper
+				display: flex
+				align-items: flex-start
+				justify-content: space-between
+				+childSpaceRight(10px)
+
+			&:not(.inputs-wrapper)
+				+childSpaceBottom(10px)
+
+			div.box
+				width: 36px
+				height: 36px
+				border: 1px solid rgba(white, .5)
+				position: relative
+
+				div.point
+					$size: 10px
+					$half: calc($size / 2)
+					width: $size
+					height: $size
+					border: 1px solid white
+					background: rgba(white, .12)
+					backdrop-filter: blur(12px)
+					position: absolute
+					cursor: pointer
+					+transition(background)
+					&:hover
+						background: rgba(white, .5)
+					&.selected
+						background: white
+
+					&:nth-child(1)
+						top: -$half
+						left: -$half
+					&:nth-child(2)
+						top: -$half
+						left: calc(50% - $half)
+					&:nth-child(3)
+						top: -$half
+						right: -$half
+
+					&:nth-child(4)
+						top: calc(50% - $half)
+						left: -$half
+					&:nth-child(5)
+						top: calc(50% - $half)
+						left: calc(50% - $half)
+					&:nth-child(6)
+						top: calc(50% - $half)
+						right: -$half
+
+					&:nth-child(7)
+						bottom: -$half
+						left: -$half
+					&:nth-child(8)
+						bottom: -$half
+						left: calc(50% - $half)
+					&:nth-child(9)
+						bottom: -$half
+						right: -$half

@@ -19,7 +19,7 @@ extends React.Component<EditorComponentWaveformProps, EditorComponentWaveformSta
 		const { model } = this.props
 		return <>
 			<EditorComponentDimensions
-				data={model.dimensions}
+				model={model.dimensions}
 			/>
 		</>
 	}

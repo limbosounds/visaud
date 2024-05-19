@@ -44,16 +44,16 @@ export const renderBounds = (
 ) => {
 	context.save()
 
-	context.strokeStyle = "rgb(0, 255, 255)"
-	context.lineWidth = 1
-	context.shadowColor = "cyan"
-	context.shadowBlur = 3
+	const width = 2
+
+	context.strokeStyle = "rgba(0, 255, 255, .54)"
+	context.lineWidth = width
 
 	context.strokeRect(
-		dimensions.left.numeric,
-		dimensions.top.numeric,
-		dimensions.width.numeric,
-		dimensions.height.numeric,
+		dimensions.left.numeric + width / 2,
+		dimensions.top.numeric + width / 2,
+		dimensions.width.numeric - width / 2,
+		dimensions.height.numeric - width / 2,
 	)
 
 	context.restore()
