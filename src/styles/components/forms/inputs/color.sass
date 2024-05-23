@@ -1,0 +1,27 @@
+@import "styles/vars"
+
+div.c-color-input
+	display: flex
+	align-items: center
+	justify-content: space-between
+
+	&.tiny
+		width: 45px
+		height: 45px
+
+	div.ci-picker-wrapper
+		position: relative
+		border: 1px solid rgba(white, .5)
+		width: 45px
+		height: 45px
+		border-radius: 3px
+
+		input[type=color]
+			width: 45px
+			height: 45px
+			opacity: 0
+			cursor: pointer
+
+		span
+			+pos(absolute, 0, 0, 0, 0)
+			pointer-events: none
