@@ -53,9 +53,14 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 									ID: <strong>{component.id}</strong>
 								</p>
 							</div>
-							<SmallButton onClick={() => visual.highlight(component.id)}>
-								Edit
-							</SmallButton>
+							<div className="actions">
+								<SmallButton onClick={() => visual.highlight(component.id)}>
+									<i className="fas fa-cogs" />
+								</SmallButton>
+								<SmallButton onClick={() => visual.removeComponent(component)}>
+									<i className="fas fa-trash-alt" />
+								</SmallButton>
+							</div>
 						</header>
 					</div>
 				})}

@@ -18,6 +18,14 @@ export interface EditorComponentDimensionsPositionState {
 export default
 class EditorComponentDimensionsPosition
 extends React.Component<EditorComponentDimensionsPositionProps, EditorComponentDimensionsPositionState> {
+	selectAnchoring = (
+		event: React.MouseEvent<HTMLDivElement>,
+		value: number,
+	) => {
+		this.props.model.anchoring.setByNumeric(value)
+		event
+	}
+
 	render() {
 		const { model } = this.props
 		return <>
@@ -29,30 +37,30 @@ extends React.Component<EditorComponentDimensionsPositionProps, EditorComponentD
 					<div className="dimp-column inputs-wrapper">
 						<SimpleInput
 							label="X (px):"
-							value={model.left.value}
-							onChange={model.left.set}
-							onBlur={model.left.correct}
+							value={model.x.value}
+							onChange={model.x.set}
+							onBlur={model.x.correct}
 							numericControls
 						/>
 						<SimpleInput
 							label="Y (px):"
-							value={model.top.value}
-							onChange={model.top.set}
-							onBlur={model.top.correct}
+							value={model.y.value}
+							onChange={model.y.set}
+							onBlur={model.y.correct}
 							numericControls
 						/>
 					</div>
 					<div className="dimp-column box-wrapper">
 						<div className="box">
-							<div className="point selected" />
-							<div className="point" />
-							<div className="point" />
-							<div className="point" />
-							<div className="point" />
-							<div className="point" />
-							<div className="point" />
-							<div className="point" />
-							<div className="point" />
+							{[...Array(9)].map((_, i) => {
+								const isSelected = i == model.anchoring.numeric
+
+								return <div
+									key={i}
+									className={`point ${isSelected ? "selected" : ""}`}
+									onClick={event => this.selectAnchoring(event, i)}
+								/>
+							})}
 						</div>
 					</div>
 				</div>

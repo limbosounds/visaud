@@ -52,13 +52,47 @@ div.c-editor-components
 		+childSpaceBottom(10px)
 		
 		div.ec-component
-			background: rgba(white, .06)
+			--bgcolor: white
 			padding: 15px
+			overflow: hidden
+			position: relative
+
+			&:before
+				content: ""
+				background: var(--bgcolor)
+				opacity: .06
+				+pos(absolute, 0, 0, 0, 0)
+				+transition(background)
+
+			&:hover
+				&:before
+					opacity: .12
+				header
+					div.actions
+						opacity: 1
+						transform: scaleX(1) translateZ(0)
 
 			header
 				display: flex
 				align-items: center
 				justify-content: space-between
+				position: relative
+
+				div.actions
+					+pos(absolute, 0, auto, 0)
+					display: flex
+					align-items: center
+					justify-content: flex-end
+					transform-origin: 100% 0%
+					opacity: 0
+					transform: scaleX(0) translateZ(0)
+					+transition(transform, opacity)
+					+childSpaceRight(5px)
+
+					div.c-small-button
+						padding: 0
+						width: 24px
+						height: 24px
 
 				div.name
 					flex-grow: 1

@@ -37,10 +37,10 @@ export const CWaveformModel = types
 				context.beginPath()
 
 				const sliceWidth = width / bufferLength
-				let x = self.dimensions.left.numeric
+				let x = self.dimensions.left
 				for (let i = 0; i < bufferLength; i++) {
 					const v = waveform[i] * halfHeight
-					const y = self.dimensions.top.numeric + halfHeight + v
+					const y = self.dimensions.top + halfHeight + v
 					if (i == 0)
 						context.moveTo(x, y)
 					else
@@ -48,7 +48,7 @@ export const CWaveformModel = types
 					x += sliceWidth
 				}
 
-				context.lineTo(self.dimensions.left.numeric + width, self.dimensions.top.numeric + halfHeight)
+				context.lineTo(self.dimensions.left + width, self.dimensions.top + halfHeight)
 				context.stroke()
 
 				if (isHighlighted)

@@ -50,8 +50,8 @@ export const VisualModel = types
 			removeComponent: (
 				component: VisualComponent,
 			) => {
-				// detach(component)
 				self.components.remove(component)
+				Scene.updateFrame()
 			},
 			highlight: (
 				id: string,

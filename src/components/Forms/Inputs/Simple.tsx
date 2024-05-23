@@ -15,7 +15,7 @@ export interface SimpleInputProps {
 	onChange: (
 		value: string
 	) => void
-	onBlur: () => void
+	onBlur?: () => void
 }
 
 export interface SimpleInputState {
@@ -105,7 +105,7 @@ extends React.Component<SimpleInputProps, SimpleInputState> {
 	}
 
 	handleBlur = () => {
-		this.props.onBlur()
+		this.props.onBlur?.()
 		this.stopInterval()
 	}
 

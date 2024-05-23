@@ -37,9 +37,9 @@ export const makeNumberModel = (
 					value: string,
 				) => {
 					if (isInt)
-						self.value = value.replace(/[^0-9]/g, "")
+						self.value = value.replace(/[^\-0-9]/g, "")
 					if (isFloat)
-						self.value = value.replace(/[^0-9.]/g, "").split(".").slice(0, 2).join(".")
+						self.value = value.replace(/[^\-0-9.]/g, "").split(".").slice(0, 2).join(".")
 				},
 				correct: () => {
 					self.value = self.numeric.toString()
