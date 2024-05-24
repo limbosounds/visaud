@@ -135,6 +135,42 @@ export const ComponentDimensionsModel = types
 	})
 	.actions(self => {
 		return {
+			align: (
+				type: IComponentDimensionsAnchoringSnapshotIn["h"] | IComponentDimensionsAnchoringSnapshotIn["v"],
+			) => {
+				const savedAnchoring = self.anchoring.numeric
+				switch (type) {
+					case "left":
+						self.anchoring.setByNumeric(0)
+						self.x.set("0")
+						break
+					case "center":
+						self.anchoring.setByNumeric(1)
+						self.x.set((Scene.width / 2).toString())
+						break
+					case "right":
+						self.anchoring.setByNumeric(2)
+						self.x.set(Scene.width.toString())
+						break
+					case "top":
+						self.anchoring.setByNumeric(0)
+						self.y.set("0")
+						break
+					case "middle":
+						self.anchoring.setByNumeric(3)
+						self.y.set((Scene.height / 2).toString())
+						break
+					case "bottom":
+						self.anchoring.setByNumeric(6)
+						self.y.set(Scene.height.toString())
+						break
+				}
+				self.anchoring.setByNumeric(savedAnchoring)
+			}
+		}
+	})
+	.actions(self => {
+		return {
 			afterCreate: () => {
 				addDisposer(self, reaction(
 					() => `${self.top} ${self.left} ${self.width.numeric} ${self.height.numeric}`,

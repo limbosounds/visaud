@@ -1,7 +1,7 @@
 import React from "react"
 import { observer } from "mobx-react"
 
-import { IComponentDimensions } from "models/components/Basic"
+import { IComponentDimensions, IComponentDimensionsAnchoring } from "models/components/Basic"
 
 import Delimiter from "components/Delimiter"
 import SimpleInput from "components/Forms/Inputs/Simple"
@@ -63,6 +63,25 @@ extends React.Component<EditorComponentDimensionsPositionProps, EditorComponentD
 							})}
 						</div>
 					</div>
+				</div>
+				<Delimiter>
+					Align
+				</Delimiter>
+				<div className="dimp-a-wrapper">
+					{([
+						"left",
+						"center",
+						"right",
+						"top",
+						"middle",
+						"bottom"
+					] as (IComponentDimensionsAnchoring["h"] | IComponentDimensionsAnchoring["v"])[]).map(value => {
+						return <i
+							key={value}
+							className={`fas fa-border-all ${value}`}
+							onClick={() => model.align(value)}
+						/>
+					})}
 				</div>
 			</section>
 		</>

@@ -13,6 +13,80 @@ section.c-component-dimensions-size
 			margin-left: 5px
 
 section.c-component-dimensions-position
+	+childSpaceBottom(10px)
+	div.dimp-a-wrapper
+		display: flex
+		align-items: center
+		justify-content: space-between
+		
+		i
+			width: 30px
+			height: 30px
+			font-size: 20px
+			position: relative
+			display: flex
+			align-items: center
+			justify-content: center
+			border-radius: 3px
+			transform: translateZ(0)
+			box-shadow: inset 0 0 0 1px rgba(white, .12)
+			cursor: pointer
+			+transition(box-shadow, background)
+			&:hover
+				box-shadow: inset 0 0 0 1px rgba(white, .24)
+				background: rgba($colorDark, .24)
+
+			&:before
+				opacity: .3
+
+			&:after
+				content: ""
+				position: absolute
+				background: white
+				opacity: 1
+
+			&.left
+				&:after
+					width: 2px
+					height: 17px
+					top: 6px
+					left: 6px
+
+			&.center
+				&:after
+					width: 2px
+					height: 17px
+					top: 6px
+					left: 14px
+
+			&.right
+				&:after
+					width: 2px
+					height: 17px
+					top: 6px
+					right: 6px
+
+			&.top
+				&:after
+					height: 2px
+					width: 17px
+					top: 6px
+					left: 7px
+
+			&.middle
+				&:after
+					height: 2px
+					width: 17px
+					top: 13px
+					left: 7px
+
+			&.bottom
+				&:after
+					height: 2px
+					width: 17px
+					bottom: 7px
+					left: 7px
+
 	div.dimp-wrapper
 		+childSpaceRight(10px)
 		display: flex
