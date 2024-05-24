@@ -1,4 +1,4 @@
-import { types, Instance, SnapshotIn } from "mobx-state-tree"
+import { types, Instance, SnapshotIn, addDisposer } from "mobx-state-tree"
 import { v4 as uuid } from "uuid"
 
 import SoundProcessor from "stores/SoundProcessor"
@@ -6,6 +6,8 @@ import SoundProcessor from "stores/SoundProcessor"
 import { ComponentDimensionsModel, renderBounds } from "./Basic"
 import { ColorModel } from "models/primitives/Color"
 import { makeNumberModel } from "models/primitives/Number"
+import { reaction } from "mobx"
+import Scene from "stores/Scene"
 
 export interface ICWaveform
 extends Instance<typeof CWaveformModel> {}
@@ -18,7 +20,7 @@ export const CWaveformModel = types
 		type: types.literal("waveform"),
 		dimensions: ComponentDimensionsModel,
 		color: ColorModel,
-		heaviness: makeNumberModel("int", 1)
+		weight: makeNumberModel("int", 1)
 	})
 	.actions(self => {
 		return {
@@ -32,7 +34,10 @@ export const CWaveformModel = types
 				const height = self.dimensions.height.numeric
 				const halfHeight = height / 2
 
-				context.lineWidth = self.heaviness.numeric
+				context.save()
+
+				context.lineWidth = self.weight.numeric
+				context.lineJoin = "round"
 				context.strokeStyle = self.color.rgba
 				context.beginPath()
 
@@ -51,8 +56,20 @@ export const CWaveformModel = types
 				context.lineTo(self.dimensions.left + width, self.dimensions.top + halfHeight)
 				context.stroke()
 
+				context.restore()
+
 				if (isHighlighted)
 					renderBounds(context, self.dimensions)
+			}
+		}
+	})
+	.actions(self => {
+		return {
+			afterCreate: () => {
+				addDisposer(self, reaction(
+					() => self.weight.numeric,
+					() => Scene.updateFrame()
+				))
 			}
 		}
 	})

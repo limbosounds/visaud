@@ -30,32 +30,30 @@ extends React.Component<ColorInputProps, ColorInputState> {
 		const isOpacityEnabled = isDefined(opacity) && isDefined(onOpacityChange)
 
 		return <>
-			<div className={`c-color-input ${isOpacityEnabled ? "" : "tiny"}`}>
-				<div className="ci-picker-wrapper">
-					<input
-						type="color"
-						value={value}
-						onInput={event => onChange(event.currentTarget.value)}
-					/>
-					<span
-						className="overlap"
-						style={{
-							background: value,
-							opacity: isDefined(opacity) ? +opacity / 100 : undefined,
-						}}
-					/>
-				</div>
-				{isOpacityEnabled &&
-					<RangeInput
-						model={model.opacity}
-						min={0}
-						max={100}
-						step={1}
-					>
-						Opacity
-					</RangeInput>
-				}
+			<div className="c-color-input">
+				<input
+					type="color"
+					value={value}
+					onInput={event => onChange(event.currentTarget.value)}
+				/>
+				<span
+					className="overlap"
+					style={{
+						background: value,
+						opacity: isDefined(opacity) ? +opacity / 100 : undefined,
+					}}
+				/>
 			</div>
+			{isOpacityEnabled &&
+				<RangeInput
+					model={model.opacity}
+					min={0}
+					max={100}
+					step={1}
+				>
+					Opacity
+				</RangeInput>
+			}
 		</>
 	}
 }

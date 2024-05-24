@@ -41,7 +41,7 @@ export const VisualModel = types
 							type: "waveform",
 							color: defaultColor(),
 							dimensions: defaultDimensions(120, 80),
-							heaviness: { value: "1" },
+							weight: { value: "1" },
 						}))
 					break
 				}

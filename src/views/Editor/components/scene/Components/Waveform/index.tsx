@@ -8,6 +8,7 @@ import { ICWaveform } from "models/components/Waveform"
 import EditorComponentDimensions from "../Dimensions"
 import Delimiter from "components/Delimiter"
 import ColorInput from "components/Forms/Inputs/Color"
+import RangeInput from "components/Forms/Inputs/Range"
 
 export interface EditorComponentWaveformProps {
 	model: ICWaveform
@@ -31,7 +32,15 @@ extends React.Component<EditorComponentWaveformProps, EditorComponentWaveformSta
 				<Delimiter>
 					Appearance
 				</Delimiter>
-				<div className="wab-color">
+				<div className="wab-appearance">
+					<RangeInput
+						model={model.weight}
+						min={1}
+						max={100}
+						step={1}
+					>
+						Weight
+					</RangeInput>
 					<ColorInput
 						model={model.color}
 						value={model.color.hex}

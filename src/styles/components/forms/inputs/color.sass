@@ -1,32 +1,22 @@
 @import "styles/vars"
 
 div.c-color-input
-	display: flex
-	align-items: flex-start
-	justify-content: flex-start
-	+childSpaceRight(10px)
+	position: relative
+	border: 1px solid rgba(white, .5)
+	width: 45px
+	height: 45px
+	border-radius: 3px
+	background-color: #888
+	background-image: linear-gradient(45deg, #aaa 25%, transparent 25%), linear-gradient(-45deg, #aaa 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #aaa 75%), linear-gradient(-45deg, transparent 75%, #aaa 75%)
+	background-size: 22px 22px
+	background-position: 0 0, 0 11px, 11px -11px, -11px 0px
 
-	&.tiny
+	input[type=color]
 		width: 45px
 		height: 45px
+		opacity: 0
+		cursor: pointer
 
-	div.ci-picker-wrapper
-		position: relative
-		border: 1px solid rgba(white, .5)
-		width: 45px
-		height: 45px
-		border-radius: 3px
-		background-color: #888
-		background-image: linear-gradient(45deg, #aaa 25%, transparent 25%), linear-gradient(-45deg, #aaa 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #aaa 75%), linear-gradient(-45deg, transparent 75%, #aaa 75%)
-		background-size: 22px 22px
-		background-position: 0 0, 0 11px, 11px -11px, -11px 0px
-
-		input[type=color]
-			width: 45px
-			height: 45px
-			opacity: 0
-			cursor: pointer
-
-		span
-			+pos(absolute, 0, 0, 0, 0)
-			pointer-events: none
+	span
+		+pos(absolute, 0, 0, 0, 0)
+		pointer-events: none

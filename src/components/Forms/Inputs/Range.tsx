@@ -1,5 +1,6 @@
 import React from "react"
 import { v4 as uuid } from "uuid"
+import { observer } from "mobx-react"
 
 import "styles/components/forms/inputs/range"
 
@@ -17,6 +18,7 @@ export interface RangeInputState {
 
 }
 
+@observer
 export default
 class RangeInput
 extends React.Component<RangeInputProps, RangeInputState> {
@@ -71,7 +73,7 @@ extends React.Component<RangeInputProps, RangeInputState> {
 		const { model, min, max } = this.props
 		const r = 48
 
-		const progress = (model.numeric - min) / (max - min)
+		const progress = (Math.min(model.numeric, max) - min) / (max - min)
 
 		return <>
 			<div className="c-range-input">
