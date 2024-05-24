@@ -4,8 +4,10 @@ import "styles/components/forms/inputs/color"
 
 import { isDefined } from "utils/types"
 import RangeInput from "./Range"
+import { IColor } from "models/primitives/Color"
 
 export interface ColorInputProps {
+	model: IColor
 	value: string
 	opacity?: string
 	onChange: (
@@ -24,7 +26,7 @@ export default
 class ColorInput
 extends React.Component<ColorInputProps, ColorInputState> {
 	render() {
-		const { value, opacity, onChange, onOpacityChange } = this.props
+		const { value, opacity, onChange, onOpacityChange, model } = this.props
 		const isOpacityEnabled = isDefined(opacity) && isDefined(onOpacityChange)
 
 		return <>
@@ -45,13 +47,13 @@ extends React.Component<ColorInputProps, ColorInputState> {
 				</div>
 				{isOpacityEnabled &&
 					<RangeInput
+						model={model.opacity}
 						min={0}
 						max={100}
 						step={1}
-						value={opacity}
-						onChange={onOpacityChange}
-						marks={[0, 25, 50, 75, 100]}
-					/>
+					>
+						Opacity
+					</RangeInput>
 				}
 			</div>
 		</>

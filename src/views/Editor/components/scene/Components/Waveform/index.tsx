@@ -33,6 +33,7 @@ extends React.Component<EditorComponentWaveformProps, EditorComponentWaveformSta
 				</Delimiter>
 				<div className="wab-color">
 					<ColorInput
+						model={model.color}
 						value={model.color.hex}
 						onChange={model.color.setFromHex}
 						opacity={model.color.opacity.value}
