@@ -4,6 +4,7 @@ import "styles/components/buttons/small"
 
 export interface SmallButtonProps {
 	onClick?: () => void
+	iconOnly?: boolean
 	children?: React.ReactNode
 }
 
@@ -17,7 +18,7 @@ extends React.Component<SmallButtonProps, SmallButtonState> {
 	render() {
 		return <>
 			<div
-				className="c-small-button"
+				className={`c-small-button ${this.props.iconOnly ? "icon" : ""}`}
 				onClick={this.props.onClick}
 			>
 				{this.props.children}

@@ -7,6 +7,7 @@ import EditorSceneRenderer from "./Renderer"
 import EditorComponents from "./Components"
 import Player from "components/Player"
 import ResizableHorizontal from "components/Resizable/Horizontal"
+import ReactorView from "../Reactor"
 
 export interface EditorSceneProps {
 
@@ -33,10 +34,14 @@ extends React.Component<EditorSceneProps, EditorSceneState> {
 						<EditorComponents />
 					</ResizableHorizontal>
 				</div>
+				<div className="reactor-row">
+					<ReactorView />
+				</div>
 				<div className="player-row">
 					<Player />
 				</div>
 			</div>
+			
 		</>
 	}
 }

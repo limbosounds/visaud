@@ -5,8 +5,10 @@ import "@sounds.of.limbo/tooltip/styles/sass/tooltip"
 import "styles/fonts"
 import "styles/main"
 import "styles/uni"
+import "styles/animations"
 
 import EditorView from "views/Editor"
+import CursorPin from "components/CursorPin"
 
 export interface AppProps {
 
@@ -23,6 +25,7 @@ extends React.Component<AppProps, AppState> {
 	render() {
 		return <>
 			<EditorView />
+			<CursorPin />
 		</>
 	}
 }

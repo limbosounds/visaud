@@ -1,10 +1,9 @@
 import React from "react"
-import { createPortal } from "react-dom"
 import { observer } from "mobx-react"
 
 import "styles/components/player"
-import SoundSource from "stores/SoundSource"
-import SoundProcessor from "stores/SoundProcessor"
+import SoundSource from "stores/Sound/Source"
+import SoundProcessor from "stores/Sound/Processor"
 import Scene from "stores/Scene"
 
 export interface PlayerProps {
@@ -75,20 +74,17 @@ extends React.Component<PlayerProps, PlayerState> {
 		const { duration, currentTime, paused } = this.state
 
 		return <>
-			{createPortal(
-				<audio
-					className="c-player-source"
-					ref={r => this.source = r}
-					src={SoundSource.objectUrl}
-					muted={false}
-					controls
-					onLoadedMetadata={this.handleLoad}
-					onTimeUpdate={this.handleTimeUpdate}
-					onPlay={Scene.startRender}
-					onPause={Scene.stopRender}
-				/>,
-				document.body,
-			)}
+			<audio
+				className="c-player-source"
+				ref={r => this.source = r}
+				src={SoundSource.objectUrl}
+				muted={false}
+				controls
+				onLoadedMetadata={this.handleLoad}
+				onTimeUpdate={this.handleTimeUpdate}
+				onPlay={Scene.startRender}
+				onPause={Scene.stopRender}
+			/>
 
 			<div className="c-player">
 				{paused

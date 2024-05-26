@@ -38,9 +38,10 @@ div.c-editor-components
 
 	div.ec-component-manager
 		+childSpaceBottom(15px)
+		
 		section
 			@extend .u-paper
-			background: rgba(white, .06)
+			--bgcolor: white
 			padding: 15px
 			padding-top: 10px
 
@@ -54,15 +55,6 @@ div.c-editor-components
 		div.ec-component
 			--bgcolor: white
 			padding: 15px
-			overflow: hidden
-			position: relative
-
-			&:before
-				content: ""
-				background: var(--bgcolor)
-				opacity: .06
-				+pos(absolute, 0, 0, 0, 0)
-				+transition(background)
 
 			&:hover
 				&:before

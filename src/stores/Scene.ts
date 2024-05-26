@@ -1,5 +1,5 @@
 import {} from "mobx"
-import SoundProcessor from "./SoundProcessor"
+import SoundProcessor from "./Sound/Processor"
 import { VisualModel } from "models/components"
 
 class SceneStore {

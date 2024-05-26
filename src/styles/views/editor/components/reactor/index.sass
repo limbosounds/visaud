@@ -1,0 +1,113 @@
+@import "styles/vars"
+@import "styles/uni"
+
+div.c-reactor
+	height: 100%
+	background: rgba(white, .12)
+	padding: 0px 15px 5px 15px
+	display: flex
+	align-items: stretch
+	justify-content: space-between
+
+	h2
+		writing-mode: vertical-lr
+		transform: rotate(-180deg)
+		font-size: 30px
+		line-height: 30px
+		text-align: center
+		height: 100%
+		flex-grow: 0
+		flex-shrink: 0
+		margin-right: 10px
+		padding-top: 10px
+		padding-bottom: 15px
+
+		i
+			margin-bottom: 10px
+
+	div.rodes-list-wrapper
+		flex-grow: 1
+		flex-shrink: 1
+		min-width: 0
+		position: relative
+		$shades: #263045
+
+		&:before, &:after
+			content: ""
+			position: absolute
+			width: 15px
+			top: 0
+			bottom: 5px
+			pointer-events: none
+			z-index: 100
+
+		&:before
+			left: 0
+			background: linear-gradient(to right, $shades, rgba($shades, 0))
+
+		&:after
+			right: 0
+			background: linear-gradient(to left, $shades, rgba($shades, 0))
+
+		div.rodes-list
+			height: 100%
+			overflow-x: scroll
+			padding: 15px 15px 5px 15px
+			+scrollbar(white, 0, .24)
+			display: flex
+			align-items: stretch
+			justify-content: flex-start
+			+childSpaceRight(10px)
+
+			> *
+				flex-grow: 0
+				flex-shrink: 0
+
+			div.add-rode
+				padding: 30px
+				background: rgba($colorDark, .12)
+				display: flex
+				align-items: center
+				justify-content: center
+				flex-direction: column
+				+childSpaceBottom(10px)
+				text-align: center
+				border: 2px dashed rgba(white, .12)
+				border-radius: 3px
+				+transition
+				cursor: pointer
+
+				&:hover
+					border-color: white
+					background: rgba($colorDark, .24)
+
+				span
+					font-weight: 700
+
+			section
+				@extend .u-paper
+				--bgcolor: white
+				padding: 15px
+
+				&.attaching
+					+singleRunAnimation(highlight, 840ms, ease-in-out)
+					animation-iteration-count: infinite
+					animation-direction: alternate
+				
+				header
+					display: flex
+					align-items: center
+					justify-content: space-between
+
+					h3
+						font-size: 16px
+						font-style: italic
+						font-variation-settings: "wght" 700
+						text-transform: capitalize
+						margin-right: 30px
+
+					div.actions
+						display: flex
+						align-items: center
+						justify-content: flex-end
+						+childSpaceRight(10px)

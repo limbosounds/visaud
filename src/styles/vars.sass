@@ -8,7 +8,7 @@ $transitionTime: 250ms
 $colorMain: #3A4CF5
 $colorAccent: #7EA0F7
 $colorDark: #1F2022
-$colorBackground: #123
+$colorBackground: #000b25
 $colorGrey: #f2f3f6
 
 $colorPositive: #19C98A
@@ -22,6 +22,9 @@ $mTabletB: 800px
 $mMobileL: 600px
 $mMobileM: 480px
 $mMobileS: 320px
+
+$footer: 240px
+$player: 54px
 
 =singleRunAnimation($name, $duration: $transitionTime, $timingFunction: $transition)
 	animation-name: $name
@@ -56,8 +59,8 @@ $mMobileS: 320px
 
 =scrollbar($color: $colorAccent, $at: .38, $bt: .72)
 	&::-webkit-scrollbar
-		width: 8px
-		height: 8px
+		width: 5px
+		height: 5px
 	&::-webkit-scrollbar-track
 		background: rgba($color, $at)
 	&::-webkit-scrollbar-thumb

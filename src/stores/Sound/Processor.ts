@@ -31,6 +31,15 @@ class SoundProcessorStore {
 		return this._freq
 	}
 
+	/**
+	 * From 0 (silence) to 1 (max volume)
+	 */
+	get peak(): number {
+		return this.waveform.reduce((max, current) => {
+			return Math.max(max, Math.abs(current))
+		}, 0)
+	}
+
 	useAudio = (
 		element: HTMLAudioElement,
 	) => {

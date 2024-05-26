@@ -1,7 +1,7 @@
 import React from "react"
 import { observer } from "mobx-react"
 
-import SoundSource from "stores/SoundSource"
+import SoundSource from "stores/Sound/Source"
 
 import EditorScene from "./components/Scene"
 
@@ -35,7 +35,9 @@ extends React.Component<EditorViewProps, EditorViewState> {
 		return <>
 			<React.Fragment key={SoundSource.version}>
 				{SoundSource.file
-					? <EditorScene />
+					? <>
+						<EditorScene />
+					</>
 					: <input
 						type="file"
 						accept=".mp3, .wav"

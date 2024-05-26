@@ -54,10 +54,16 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 								</p>
 							</div>
 							<div className="actions">
-								<SmallButton onClick={() => visual.highlight(component.id)}>
+								<SmallButton
+									iconOnly
+									onClick={() => visual.highlight(component.id)}
+								>
 									<i className="fas fa-cogs" />
 								</SmallButton>
-								<SmallButton onClick={() => visual.removeComponent(component)}>
+								<SmallButton
+									iconOnly
+									onClick={() => visual.removeComponent(component)}
+								>
 									<i className="fas fa-trash-alt" />
 								</SmallButton>
 							</div>

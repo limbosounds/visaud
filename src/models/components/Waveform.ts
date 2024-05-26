@@ -1,7 +1,7 @@
 import { types, Instance, SnapshotIn, addDisposer } from "mobx-state-tree"
 import { v4 as uuid } from "uuid"
 
-import SoundProcessor from "stores/SoundProcessor"
+import SoundProcessor from "stores/Sound/Processor"
 
 import { ComponentDimensionsModel, renderBounds } from "./Basic"
 import { ColorModel } from "models/primitives/Color"

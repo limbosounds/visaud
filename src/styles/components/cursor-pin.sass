@@ -1,0 +1,33 @@
+@import "styles/vars"
+
+div.c-cursor-pin
+	+pos(fixed, 0, 0, 0, 0)
+	z-index: 1000000
+	pointer-events: none
+	overflow: hidden
+	--x: 0
+	--y: 0
+
+	div.label
+		+childSpaceRight(5px)
+		display: flex
+		align-items: center
+		justify-content: center
+		position: absolute
+		top: var(--y)
+		left: var(--x)
+		background: rgba($colorDark, .5)
+		padding: 2px 5px
+		font-size: 12px
+
+		&.rode
+			
+			i
+				color: cyan
+
+			strong
+				text-transform: capitalize
+
+		strong
+			font-weight: 700
+			font-style: italic

@@ -6,7 +6,7 @@ div.c-editor-scene
 		display: flex
 		align-items: stretch
 		justify-content: space-between
-		height: 80vh
+		height: calc(100vh - #{$footer})
 
 		div.renderer
 			flex-grow: 1
@@ -14,8 +14,13 @@ div.c-editor-scene
 			display: flex
 			align-items: center
 			justify-content: center
-			background: grey
+			background: rgba(white, .24)
 
 		div.components
 			flex-grow: 0
 			flex-shrink: 0
+			border-left: 2px solid $colorDark
+
+	div.reactor-row
+		height: $footer - $player
+		border-top: 2px solid $colorDark
