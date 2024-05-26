@@ -2,19 +2,20 @@ import { types, Instance, SnapshotIn } from "mobx-state-tree"
 import { isDefined } from "utils/types"
 
 export interface INumber
-extends Instance<ReturnType<typeof makeNumberModel>> {}
+extends Instance<ReturnType<typeof makePlainNumberModel>> {}
 export interface INumberSnapshotIn
-extends SnapshotIn<ReturnType<typeof makeNumberModel>> {}
+extends SnapshotIn<ReturnType<typeof makePlainNumberModel>> {}
 
-export const makeNumberModel = (
+export const makePlainNumberModel = (
 	type: "int" | "float",
 	min?: number,
 	max?: number,
 ) => {
 	const isInt = type == "int"
 	const isFloat = type == "float"
+
 	return types
-		.model(`Primitive::Number_${type}`, {
+		.model(`Primitive::Number(${type})`, {
 			value: "",
 		})
 		.views(self => {

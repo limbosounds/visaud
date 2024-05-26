@@ -1,6 +1,6 @@
 import {} from "mobx"
 import SoundProcessor from "./Sound/Processor"
-import { VisualModel } from "models/components"
+import { EditorModel } from "models/editor"
 
 class SceneStore {
 	private fps
@@ -30,11 +30,11 @@ class SceneStore {
 		this.context.fillStyle = "rgb(0, 0, 0)"
 		this.context.fillRect(0, 0, width, height)
 		
-		this.visual.components.forEach(component => {
+		this.editor.components.forEach(component => {
 			component.render(
 				this.context,
 				SoundProcessor.analyser.fftSize,
-				this.visual.highlighted == component.id,
+				this.editor.isComponentSelected(component.id),
 			)
 		})
 	}
@@ -62,8 +62,10 @@ class SceneStore {
 		}
 	}
 
-	readonly visual
-		= VisualModel.create({})
+	readonly editor
+		= EditorModel.create({
+			reactor: {},
+		})
 
 	readonly width
 		: number

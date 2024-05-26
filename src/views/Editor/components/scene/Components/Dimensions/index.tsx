@@ -3,7 +3,7 @@ import { observer } from "mobx-react"
 
 import "styles/views/editor/components/scene/components/dimensions"
 
-import { IComponentDimensions } from "models/components/Basic"
+import { IComponentDimensions } from "models/editor/components/Basic"
 
 import EditorComponentDimensionsSize from "./Size"
 import EditorComponentDimensionsPosition from "./Position"

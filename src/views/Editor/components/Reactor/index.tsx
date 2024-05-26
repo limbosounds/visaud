@@ -3,8 +3,11 @@ import { createPortal } from "react-dom"
 import { observer } from "mobx-react"
 
 import "styles/views/editor/components/reactor"
-import Reactor from "stores/Reactor"
+
 import { IReactorRode } from "models/reactor/rodes"
+import Scene from "stores/Scene"
+
+
 import SmallButton from "components/Buttons/Small"
 
 export interface ReactorViewProps {
@@ -31,7 +34,7 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 		event: KeyboardEvent,
 	) => {
 		if (event.key == "Escape")
-			Reactor.model.setAttachableRode()
+			Scene.editor.reactor.setAttachableRode()
 	}
 
 	getRodeComponent = (
@@ -46,10 +49,8 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 	}
 
 	render() {
-		const { model: reactor } = Reactor
-		const attachableRode = reactor.attachableRode
-			? reactor.getRodeById(reactor.attachableRode)
-			: undefined
+		const { reactor } = Scene.editor
+		const { attachableRode } = reactor
 
 		return <>
 			{attachableRode &&
@@ -73,7 +74,7 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 				<div className="rodes-list-wrapper">
 					<div className="rodes-list">
 						{reactor.rodes.map(rode => {
-							const isAttaching = rode.id == reactor.attachableRode
+							const isAttaching = rode.id == reactor.attachableRode?.id
 
 							return <section
 								key={rode.id}
@@ -86,7 +87,7 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 											iconOnly
 											onClick={() => isAttaching
 												? reactor.setAttachableRode()
-												: reactor.setAttachableRode(rode.id)
+												: reactor.setAttachableRode(rode)
 											}
 										>
 											<i className="fas fa-link" />

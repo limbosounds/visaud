@@ -1,6 +1,6 @@
 import { reaction } from "mobx"
 import { types, Instance, SnapshotIn, addDisposer, getParent } from "mobx-state-tree"
-import { makeNumberModel } from "models/primitives/Number"
+import { makePlainNumberModel } from "models/primitives/Number"
 import Scene from "stores/Scene"
 
 export interface IComponentDimensionsAnchoring
@@ -103,10 +103,10 @@ extends SnapshotIn<typeof ComponentDimensionsModel> {}
 
 export const ComponentDimensionsModel = types
 	.model("ComponentDimensions", {
-		x: makeNumberModel("float"),
-		y: makeNumberModel("float"),
-		width: makeNumberModel("int", 1),
-		height: makeNumberModel("int", 1),
+		x: makePlainNumberModel("float"),
+		y: makePlainNumberModel("float"),
+		width: makePlainNumberModel("int", 1),
+		height: makePlainNumberModel("int", 1),
 		anchoring: ComponentDimensionsAnchoringModel,
 	})
 	.views(self => {

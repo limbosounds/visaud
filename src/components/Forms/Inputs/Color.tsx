@@ -3,7 +3,7 @@ import React from "react"
 import "styles/components/forms/inputs/color"
 
 import { isDefined } from "utils/types"
-import RangeInput from "./Range"
+import Knob from "../Knob"
 import { IColor } from "models/primitives/Color"
 
 export interface ColorInputProps {
@@ -45,14 +45,14 @@ extends React.Component<ColorInputProps, ColorInputState> {
 				/>
 			</div>
 			{isOpacityEnabled &&
-				<RangeInput
+				<Knob
 					model={model.opacity}
 					min={0}
 					max={100}
 					step={1}
 				>
 					Opacity
-				</RangeInput>
+				</Knob>
 			}
 		</>
 	}

@@ -1,7 +1,8 @@
 import { types, Instance, SnapshotIn } from "mobx-state-tree"
-import { makeNumberModel } from "models/primitives/Number"
+
 import Processor from "stores/Sound/Processor"
-import { v4 as uuid } from "uuid"
+
+import { makePlainNumberModel } from "models/primitives/Number"
 
 export interface IPeakRode
 extends Instance<typeof PeakRodeModel> {}
@@ -10,9 +11,9 @@ extends SnapshotIn<typeof PeakRodeModel> {}
 
 export const PeakRodeModel = types
 	.model("Rodes::Peak", {
-		id: types.optional(types.string, uuid),
+		id: types.identifier,
 		type: types.literal("peak"),
-		spread: makeNumberModel("float", -100, 100),
+		spread: makePlainNumberModel("float", -100, 100),
 	})
 	.views(self => {
 		return {

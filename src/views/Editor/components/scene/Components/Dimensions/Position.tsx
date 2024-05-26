@@ -1,7 +1,7 @@
 import React from "react"
 import { observer } from "mobx-react"
 
-import { IComponentDimensions, IComponentDimensionsAnchoring } from "models/components/Basic"
+import { IComponentDimensions, IComponentDimensionsAnchoring } from "models/editor/components/Basic"
 
 import Delimiter from "components/Delimiter"
 import SimpleInput from "components/Forms/Inputs/Simple"

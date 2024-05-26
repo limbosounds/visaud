@@ -4,9 +4,12 @@ import { observer } from "mobx-react"
 import "styles/views/editor/components/scene/components"
 
 import Scene from "stores/Scene"
+
+import { ICWaveform } from "models/editor/components/Waveform"
+import { IEditorComponent } from "models/editor/components"
+
 import SmallButton from "components/Buttons/Small"
 import EditorComponentWaveform from "./Waveform"
-import { ICWaveform } from "models/components/Waveform"
 
 export interface EditorComponentsProps {
 
@@ -21,7 +24,7 @@ export default
 class EditorComponents
 extends React.Component<EditorComponentsProps, EditorComponentsState> {
 	getComponentManager = (
-		component: NonNullable<typeof Scene["visual"]["highlightedComponent"]>
+		component: IEditorComponent,
 	) => {
 		switch (component.type) {
 			case "waveform":
@@ -32,7 +35,7 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 	}
 
 	get list(): React.ReactNode {
-		const { visual } = Scene
+		const { editor: visual } = Scene
 
 		return <>
 			<h1>
@@ -56,7 +59,7 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 							<div className="actions">
 								<SmallButton
 									iconOnly
-									onClick={() => visual.highlight(component.id)}
+									onClick={() => visual.select(component)}
 								>
 									<i className="fas fa-cogs" />
 								</SmallButton>
@@ -74,7 +77,7 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 
 			<div
 				className="add-button"
-				onClick={() => Scene.visual.addComponent("waveform")}
+				onClick={() => Scene.editor.addComponent("waveform")}
 			>
 				<i className="fas fa-plus" />
 				<span>
@@ -85,35 +88,34 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 	}
 
 	get item(): React.ReactNode {
-		const { visual } = Scene
-		const { highlightedComponent } = visual
+		const { editor: visual } = Scene
+		const { selectedComponent } = visual
 
-		if (!highlightedComponent)
+		if (!selectedComponent)
 			return
 
 		return <>
 			<h1>
 				<i
 					className="fas fa-chevron-left"
-					onClick={visual.unhighlight}	
+					onClick={() => visual.select()}	
 				/>
 				<span>
-					{highlightedComponent.type}
+					{selectedComponent.type}
 				</span>
 			</h1>
 			<div className="ec-component-manager u-paper">
-				{this.getComponentManager(highlightedComponent)}
+				{this.getComponentManager(selectedComponent)}
 			</div>
 		</>
 	}
 
 	render() {
-		const { visual } = Scene
-		const { highlightedComponent } = visual
+		const { editor } = Scene
 
 		return <>
 			<div className="c-editor-components">
-				{highlightedComponent
+				{editor.selectedComponent
 					? this.item
 					: this.list
 				}

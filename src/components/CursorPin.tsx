@@ -46,8 +46,8 @@ extends React.Component<CursorPinProps, CursorPinState> {
 				id="cursorPin"
 				className="c-cursor-pin"
 				style={{
-					"--x": `${x + 20}px`,
-					"--y": `${y + 20}px`
+					"--x": `${x + 10}px`,
+					"--y": `${y + 10}px`
 				} as React.CSSProperties}
 			/>
 		</>

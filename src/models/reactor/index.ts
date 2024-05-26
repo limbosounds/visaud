@@ -1,6 +1,8 @@
 import { types, Instance, SnapshotIn } from "mobx-state-tree"
-import { PeakRodeModel } from "./rodes/peak"
-import { IReactorRode, ReactorRodeType } from "./rodes"
+import { v4 as uuid } from "uuid"
+
+import { PeakRodeModel } from "./rodes/Peak"
+import { IReactorRode, ReactorRodeModel, ReactorRodeType } from "./rodes"
 
 export interface IReactor
 extends Instance<typeof ReactorModel> {}
@@ -9,12 +11,8 @@ extends SnapshotIn<typeof ReactorModel> {}
 
 export const ReactorModel = types
 	.model("ReactorModel", {
-		rodes: types.array(
-			types.union(
-				PeakRodeModel,
-			)
-		),
-		attachableRode: types.maybe(types.string),
+		rodes: types.array(ReactorRodeModel),
+		attachableRode: types.safeReference(ReactorRodeModel),
 	})
 	.views(self => {
 		return {
@@ -28,7 +26,7 @@ export const ReactorModel = types
 	.actions(self => {
 		return {
 			setAttachableRode: (
-				value?: string,
+				value?: IReactorRode,
 			) => {
 				self.attachableRode = value
 			},
@@ -38,6 +36,7 @@ export const ReactorModel = types
 				switch (type) {
 					case "peak":
 						self.rodes.push(PeakRodeModel.create({
+							id: uuid(),
 							type: "peak",
 							spread: { value: "0" },
 						}))

@@ -1,5 +1,6 @@
 import { types, Instance, SnapshotIn, addDisposer } from "mobx-state-tree"
-import { makeNumberModel } from "./Number"
+import { makePlainNumberModel } from "./Number"
+import { makeRodedNumberModel } from "./roded/Number"
 import { reaction } from "mobx"
 import Scene from "stores/Scene"
 
@@ -10,10 +11,10 @@ extends SnapshotIn<typeof ColorModel> {}
 
 export const ColorModel = types
 	.model("Primitive::Color", {
-		red: makeNumberModel("int", 0, 255),
-		green: makeNumberModel("int", 0, 255),
-		blue: makeNumberModel("int", 0, 255),
-		opacity: makeNumberModel("int", 0, 100)
+		red: makePlainNumberModel("int", 0, 255),
+		green: makePlainNumberModel("int", 0, 255),
+		blue: makePlainNumberModel("int", 0, 255),
+		opacity: makeRodedNumberModel("int", 0, 100),
 	})
 	.views(self => {
 		const { red, green, blue, opacity } = self

@@ -2,26 +2,26 @@ import React from "react"
 import { v4 as uuid } from "uuid"
 import { observer } from "mobx-react"
 
-import "styles/components/forms/inputs/range"
+import "styles/components/forms/knob"
 
-import { INumber } from "models/primitives/Number"
+import { IRodedNumber } from "models/primitives/roded/Number"
 
-export interface RangeInputProps {
-	model: INumber
+export interface KnobProps {
+	model: IRodedNumber
 	min: number
 	max: number
 	step: number
 	children?: React.ReactNode
 }
 
-export interface RangeInputState {
+export interface KnobState {
 
 }
 
 @observer
 export default
-class RangeInput
-extends React.Component<RangeInputProps, RangeInputState> {
+class Knob
+extends React.Component<KnobProps, KnobState> {
 	markersId
 		= uuid()
 

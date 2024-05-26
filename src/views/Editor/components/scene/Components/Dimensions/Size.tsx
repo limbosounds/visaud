@@ -1,7 +1,7 @@
 import React from "react"
 import { observer } from "mobx-react"
 
-import { IComponentDimensions } from "models/components/Basic"
+import { IComponentDimensions } from "models/editor/components/Basic"
 
 import Scene from "stores/Scene"
 

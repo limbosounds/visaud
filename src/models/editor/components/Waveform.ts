@@ -1,11 +1,10 @@
 import { types, Instance, SnapshotIn, addDisposer } from "mobx-state-tree"
-import { v4 as uuid } from "uuid"
 
 import SoundProcessor from "stores/Sound/Processor"
 
 import { ComponentDimensionsModel, renderBounds } from "./Basic"
 import { ColorModel } from "models/primitives/Color"
-import { makeNumberModel } from "models/primitives/Number"
+import { makeRodedNumberModel } from "models/primitives/roded/Number"
 import { reaction } from "mobx"
 import Scene from "stores/Scene"
 
@@ -16,11 +15,11 @@ extends SnapshotIn<typeof CWaveformModel> {}
 
 export const CWaveformModel = types
 	.model("Component::Waveform", {
-		id: types.optional(types.string, () => uuid()),
+		id: types.identifier,
 		type: types.literal("waveform"),
 		dimensions: ComponentDimensionsModel,
 		color: ColorModel,
-		weight: makeNumberModel("int", 1)
+		weight: makeRodedNumberModel("int", 1, 100)
 	})
 	.actions(self => {
 		return {
