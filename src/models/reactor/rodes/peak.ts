@@ -27,13 +27,6 @@ export const PeakRodeModel = types
 	})
 	.views(self => {
 		return {
-			getSpreadLimitValue: (
-				from: number,
-				min: number,
-				max: number,
-			): number => {
-				return (from + self.getSpreadLimit(min, max)).limit(min, max)
-			},
 			getPeakedValue: (
 				from: number,
 				min: number,

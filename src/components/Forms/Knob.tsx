@@ -81,8 +81,23 @@ extends React.Component<KnobProps<R>, KnobState> {
 	render() {
 		const { rodable = false, model, min, max, twoside } = this.props
 		const r = 48
+		const rr = 44
 
-		const progress = (Math.min(model.numeric, max) - min) / (max - min)
+		const cappedNumeric = model.numeric.limit(min, max)
+		const progress = (cappedNumeric - min) / (max - min)
+
+		let rodedMaxProgress = 0
+		if (rodable) {
+			const { rode } = model as IRodedNumber
+			if (rode) {
+				const maxSpread = rode.getSpreadLimit(min, max)
+				const capped = maxSpread < 0
+					? Math.max(-cappedNumeric, maxSpread)
+					: Math.min(max - cappedNumeric, maxSpread)
+				rodedMaxProgress = (capped - min) / (max - min)
+			}
+		}
+
 		const { attachableRode } = Scene.editor.reactor
 
 		return <>
@@ -107,6 +122,19 @@ extends React.Component<KnobProps<R>, KnobState> {
 									"--progress": `${progress * 75}`
 								} as React.CSSProperties}
 							/>
+							{rodable && (model as IRodedNumber).rode &&
+								<circle
+									className={`roded ${rodedMaxProgress < 0 ? "negative" : ""}`}
+									cx={r / 2}
+									cy={r / 2}
+									r={(rr - 4) / 2}
+									pathLength={100}
+									style={{
+										"--progress": `${progress * 75}`,
+										"--max-progress": `${rodedMaxProgress * 75}`,
+									} as React.CSSProperties}
+								/>
+							}
 						</svg>
 					</div>
 					<div className="ri-thumb">

@@ -1,4 +1,5 @@
 @import "styles/vars"
+@import "styles/uni"
 
 div.c-range-input
 	width: 48px
@@ -31,8 +32,13 @@ div.c-range-input
 							stroke-dasharray: 0 var(--progress) calc(37.5 - var(--progress)) calc(37.5 + 25)
 							&.overhalf
 								stroke-dasharray: 0 37.5 calc(var(--progress) - 37.5) calc(100 - var(--progress))
-							// transform-origin: 50% 50%
-							// transform: rotate(135deg) translateZ(0)
+
+					&.roded
+						stroke-width: 4px
+						stroke: $colorReactor
+						stroke-dasharray: 0 var(--progress) var(--max-progress) calc(100 - var(--progress) - var(--max-progress))
+						&.negative
+							stroke-dasharray: 0 calc(var(--progress) + var(--max-progress)) calc(-1 * var(--max-progress)) calc(100 - var(--progress))
 
 		div.ri-thumb
 			+pos(absolute, 0, 0, 0, 0)
@@ -63,6 +69,7 @@ div.c-range-input
 
 			i
 				+pos(absolute, 0, 0, 0, 0)
+				padding-top: 1px
 				display: flex
 				align-items: center
 				justify-content: center
@@ -71,14 +78,18 @@ div.c-range-input
 				+transition
 
 				&.highlight
-					color: rgba(cyan, .7)
+					color: rgba($colorReactor, .7)
 					& + span.value
 						opacity: 0
 
-				&.roded
-					color: rgba(cyan, .2)
+					
+
+				&:not(.highlight).roded
+					@extend .u-highlight
+					color: rgba($colorReactor, .2)
+
 					& + span.value
-						color: cyan
+						color: $colorReactor
 
 			span.value
 				position: relative
