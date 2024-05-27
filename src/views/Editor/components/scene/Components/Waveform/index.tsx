@@ -38,6 +38,7 @@ extends React.Component<EditorComponentWaveformProps, EditorComponentWaveformSta
 						min={1}
 						max={100}
 						step={1}
+						rodable
 					>
 						Weight
 					</Knob>

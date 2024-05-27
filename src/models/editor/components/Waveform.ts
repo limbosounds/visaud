@@ -35,7 +35,7 @@ export const CWaveformModel = types
 
 				context.save()
 
-				context.lineWidth = self.weight.numeric
+				context.lineWidth = self.weight.roded
 				context.lineJoin = "round"
 				context.strokeStyle = self.color.rgba
 				context.beginPath()

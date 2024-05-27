@@ -23,7 +23,7 @@ export const ColorModel = types
 				return `rgb(${red.numeric}, ${green.numeric}, ${blue.numeric})`
 			},
 			get rgba(): string {
-				return `rgba(${red.numeric}, ${green.numeric}, ${blue.numeric}, ${opacity.numeric / 100})`
+				return `rgba(${red.numeric}, ${green.numeric}, ${blue.numeric}, ${opacity.roded / 100})`
 			},
 			get hex(): string {
 				return `#${

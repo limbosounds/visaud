@@ -88,16 +88,16 @@ div.c-reactor
 				@extend .u-paper
 				--bgcolor: white
 				padding: 15px
-
-				&.attaching
-					+singleRunAnimation(highlight, 840ms, ease-in-out)
-					animation-iteration-count: infinite
-					animation-direction: alternate
+				display: flex
+				flex-direction: column
+				align-items: stretch
+				justify-content: space-between
 				
-				header
+				> header
 					display: flex
 					align-items: center
 					justify-content: space-between
+					margin-bottom: 10px
 
 					h3
 						font-size: 16px
@@ -111,3 +111,11 @@ div.c-reactor
 						align-items: center
 						justify-content: flex-end
 						+childSpaceRight(10px)
+
+				> div.content
+					flex-grow: 1
+					flex-shrink: 1
+					min-height: 0
+					display: flex
+					align-items: center
+					justify-content: center

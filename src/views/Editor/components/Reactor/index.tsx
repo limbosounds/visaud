@@ -9,6 +9,7 @@ import Scene from "stores/Scene"
 
 
 import SmallButton from "components/Buttons/Small"
+import PeakRode from "./components/rodes/Peak"
 
 export interface ReactorViewProps {
 
@@ -42,7 +43,7 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 	): React.ReactNode => {
 		switch (rode.type) {
 			case "peak":
-				return null
+				return <PeakRode model={rode} />
 			default:
 				return null
 		}
@@ -78,7 +79,7 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 
 							return <section
 								key={rode.id}
-								className={`${isAttaching ? "attaching" : ""}`}
+								className={`${isAttaching ? "attaching u-highlight" : ""}`}
 							>
 								<header>
 									<h3>{rode.type}</h3>

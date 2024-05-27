@@ -1,6 +1,6 @@
 import { types, Instance, SnapshotIn } from "mobx-state-tree"
 
-import { ReactorRodeModel } from "models/reactor/rodes"
+import { IReactorRode, ReactorRodeModel } from "models/reactor/rodes"
 
 import { makePlainNumberModel } from "../Number"
 
@@ -18,7 +18,7 @@ export const makeRodedNumberModel = (
 		`Rodable::Number(${type})`,
 		makePlainNumberModel(type, min, max),
 		types.model({
-			rode: types.maybe(types.reference(ReactorRodeModel))
+			rode: types.safeReference(ReactorRodeModel),
 		})
 	)
 	.views(self => {
@@ -31,6 +31,15 @@ export const makeRodedNumberModel = (
 					case "peak":
 						return self.rode.getPeakedValue(self.numeric, min, max)
 				}
+			}
+		}
+	})
+	.actions(self => {
+		return {
+			attachRode: (
+				rode?: IReactorRode,
+			) => {
+				self.rode = rode
 			}
 		}
 	})

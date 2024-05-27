@@ -18,9 +18,7 @@ extends SnapshotIn<typeof EditorModel> {}
 export const EditorModel = types
 	.model("Editor", {
 		components: types.array(EditorComponentModel),
-		selectedComponent: types.maybe(
-			types.reference(EditorComponentModel)
-		),
+		selectedComponent: types.safeReference(EditorComponentModel),
 
 		reactor: ReactorModel,
 	})

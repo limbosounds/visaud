@@ -5,12 +5,16 @@ import { observer } from "mobx-react"
 import "styles/components/forms/knob"
 
 import { IRodedNumber } from "models/primitives/roded/Number"
+import { INumber } from "models/primitives/Number"
+import Scene from "stores/Scene"
 
-export interface KnobProps {
-	model: IRodedNumber
+export interface KnobProps<R extends boolean = false> {
+	rodable: R
+	model: R extends true ? IRodedNumber : INumber
 	min: number
 	max: number
 	step: number
+	twoside?: boolean
 	children?: React.ReactNode
 }
 
@@ -20,8 +24,8 @@ export interface KnobState {
 
 @observer
 export default
-class Knob
-extends React.Component<KnobProps, KnobState> {
+class Knob<R extends boolean>
+extends React.Component<KnobProps<R>, KnobState> {
 	markersId
 		= uuid()
 
@@ -50,9 +54,14 @@ extends React.Component<KnobProps, KnobState> {
 	handleMouseDown = (
 		event: React.MouseEvent<HTMLDivElement>,
 	) => {
-		this.dragged = true
-		this.startValue = this.props.model.numeric
-		this.startY = event.clientY
+		if (this.props.rodable && Scene.editor.reactor.attachableRode) {
+			(this.props.model as IRodedNumber).attachRode(Scene.editor.reactor.attachableRode)
+			Scene.editor.reactor.setAttachableRode()
+		} else {
+			this.dragged = true
+			this.startValue = this.props.model.numeric
+			this.startY = event.clientY
+		}
 	}
 
 	handleMouseMove = (
@@ -70,14 +79,15 @@ extends React.Component<KnobProps, KnobState> {
 	}
 
 	render() {
-		const { model, min, max } = this.props
+		const { rodable = false, model, min, max, twoside } = this.props
 		const r = 48
 
 		const progress = (Math.min(model.numeric, max) - min) / (max - min)
+		const { attachableRode } = Scene.editor.reactor
 
 		return <>
 			<div className="c-range-input">
-				<div className="ri-round-wrapper">
+				<div className={`ri-round-wrapper ${rodable && attachableRode ? "u-highlight" : ""}`}>
 					<div className="ri-scale">
 						<svg viewBox={`0 0 ${r} ${r}`}>
 							<circle
@@ -88,7 +98,7 @@ extends React.Component<KnobProps, KnobState> {
 								pathLength={100}
 							/>
 							<circle
-								className="current"
+								className={`current ${twoside ? "twoside" : ""} ${progress > 0.5 ? "overhalf" : ""}`}
 								cx={r / 2}
 								cy={r / 2}
 								r={(r - 4) / 2}
@@ -107,9 +117,30 @@ extends React.Component<KnobProps, KnobState> {
 							} as React.CSSProperties}
 							onMouseDown={this.handleMouseDown}
 						/>
+						{/* {rodable && (model as IRodedNumber).rode &&
+							<div
+								className="thumb-handle rode"
+								style={{
+									"--rotate": `${progress * (135 * 2) - 135}deg`
+								} as React.CSSProperties}
+							>
+
+							</div>
+						} */}
 					</div>
 					<div className="ri-value">
-						{model.numeric}
+						{rodable
+							? <>
+								<i className={`fas fa-atom ${attachableRode ? "highlight" : ""} ${(model as IRodedNumber).rode ? "roded" : ""}`} />
+								<span className="value">
+									{model.numeric}
+								</span>
+							</>
+							: <span className="value">
+								{model.numeric}
+							</span>
+						}
+
 					</div>
 				</div>
 				{this.props.children &&

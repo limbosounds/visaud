@@ -50,6 +50,7 @@ extends React.Component<ColorInputProps, ColorInputState> {
 					min={0}
 					max={100}
 					step={1}
+					rodable
 				>
 					Opacity
 				</Knob>
