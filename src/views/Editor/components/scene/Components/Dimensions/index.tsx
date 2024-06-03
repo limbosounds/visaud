@@ -10,6 +10,7 @@ import EditorComponentDimensionsPosition from "./Position"
 
 export interface EditorComponentDimensionsProps {
 	model: IComponentDimensions
+	circled?: boolean
 }
 
 export interface EditorComponentDimensionsState {
@@ -23,8 +24,14 @@ extends React.Component<EditorComponentDimensionsProps, EditorComponentDimension
 	render() {
 		const { model } = this.props
 		return <>
-			<EditorComponentDimensionsPosition model={model} />
-			<EditorComponentDimensionsSize model={model} />
+			<EditorComponentDimensionsPosition
+				circled={this.props.circled}
+				model={model}
+			/>
+			<EditorComponentDimensionsSize
+				circled={this.props.circled}
+				model={model}
+			/>
 		</>
 	}
 }

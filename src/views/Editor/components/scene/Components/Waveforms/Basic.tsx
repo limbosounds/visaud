@@ -1,27 +1,27 @@
 import React from "react"
 import { observer } from "mobx-react"
 
-import "styles/views/editor/components/scene/components/waveform"
+import "styles/views/editor/components/scene/components/waveforms/basic"
 
-import { ICWaveform } from "models/editor/components/Waveform"
+import { ICWaveformBasic } from "models/editor/components/waveforms/Basic"
 
 import EditorComponentDimensions from "../Dimensions"
 import Delimiter from "components/Delimiter"
 import ColorInput from "components/Forms/Inputs/Color"
 import Knob from "components/Forms/Knob"
 
-export interface EditorComponentWaveformProps {
-	model: ICWaveform
+export interface EditorComponentWaveformBasicProps {
+	model: ICWaveformBasic
 }
 
-export interface EditorComponentWaveformState {
+export interface EditorComponentWaveformBasicState {
 
 }
 
 @observer
 export default
-class EditorComponentWaveform
-extends React.Component<EditorComponentWaveformProps, EditorComponentWaveformState> {
+class EditorComponentWaveformBasic
+extends React.Component<EditorComponentWaveformBasicProps, EditorComponentWaveformBasicState> {
 	render() {
 		const { model } = this.props
 		return <>

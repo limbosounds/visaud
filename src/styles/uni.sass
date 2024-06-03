@@ -47,3 +47,25 @@
 
 	span
 		font-weight: 700
+
+ul.u-list
+	list-style: none
+
+	li
+		padding: 10px 15px
+		border-bottom: 1px solid rgba($colorDark, .12)
+		cursor: pointer
+		+transition
+
+		&:last-child
+			border-bottom: none
+
+		&:hover
+			background: rgba($colorMain, .12)
+			span
+				transform: translateX(6px) translateZ(0)
+				color: $colorMain
+
+		span
+			display: block
+			+transition

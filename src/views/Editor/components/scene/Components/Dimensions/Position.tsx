@@ -8,6 +8,7 @@ import SimpleInput from "components/Forms/Inputs/Simple"
 
 export interface EditorComponentDimensionsPositionProps {
 	model: IComponentDimensions
+	circled?: boolean
 }
 
 export interface EditorComponentDimensionsPositionState {
@@ -27,7 +28,7 @@ extends React.Component<EditorComponentDimensionsPositionProps, EditorComponentD
 	}
 
 	render() {
-		const { model } = this.props
+		const { model, circled = false } = this.props
 		return <>
 			<section className="c-component-dimensions-position">
 				<Delimiter>
@@ -36,33 +37,35 @@ extends React.Component<EditorComponentDimensionsPositionProps, EditorComponentD
 				<div className="dimp-wrapper">
 					<div className="dimp-column inputs-wrapper">
 						<SimpleInput
-							label="X (px):"
+							label={`${circled ? "C" : ""}X (px):`}
 							value={model.x.value}
 							onChange={model.x.set}
 							onBlur={model.x.correct}
 							numericControls
 						/>
 						<SimpleInput
-							label="Y (px):"
+							label={`${circled ? "C" : ""}Y (px):`}
 							value={model.y.value}
 							onChange={model.y.set}
 							onBlur={model.y.correct}
 							numericControls
 						/>
 					</div>
-					<div className="dimp-column box-wrapper">
-						<div className="box">
-							{[...Array(9)].map((_, i) => {
-								const isSelected = i == model.anchoring.numeric
+					{!circled &&
+						<div className="dimp-column box-wrapper">
+							<div className="box">
+								{[...Array(9)].map((_, i) => {
+									const isSelected = i == model.anchoring.numeric
 
-								return <div
-									key={i}
-									className={`point ${isSelected ? "selected" : ""}`}
-									onClick={event => this.selectAnchoring(event, i)}
-								/>
-							})}
+									return <div
+										key={i}
+										className={`point ${isSelected ? "selected" : ""}`}
+										onClick={event => this.selectAnchoring(event, i)}
+									/>
+								})}
+							</div>
 						</div>
-					</div>
+					}
 				</div>
 				<Delimiter>
 					Align

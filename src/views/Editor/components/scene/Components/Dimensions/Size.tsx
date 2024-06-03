@@ -11,6 +11,7 @@ import SmallButton from "components/Buttons/Small"
 
 export interface EditorComponentDimensionsSizeProps {
 	model: IComponentDimensions
+	circled?: boolean
 }
 
 export interface EditorComponentDimensionsSizeState {
@@ -22,9 +23,29 @@ export default
 class EditorComponentDimensionsSize
 extends React.Component<EditorComponentDimensionsSizeProps, EditorComponentDimensionsSizeState> {
 	render() {
-		const { model } = this.props
-		return <>
-			<section className="c-component-dimensions-size">
+		const { model, circled = false } = this.props
+		return circled
+			? <section className="c-component-dimensions-size">
+				<Delimiter>
+					Size
+				</Delimiter>
+				<div className="dims-row">
+					<SimpleInput
+						label="Radius (px):"
+						value={model.width.value}
+						onChange={value => {
+							model.width.set(value)
+							model.height.set(value)
+						}}
+						onBlur={() => {
+							model.width.correct()
+							model.height.correct()
+						}}
+						numericControls
+					/>
+				</div>
+			</section>
+			: <section className="c-component-dimensions-size">
 				<Delimiter>
 					Size
 				</Delimiter>
@@ -57,6 +78,5 @@ extends React.Component<EditorComponentDimensionsSizeProps, EditorComponentDimen
 					</SmallButton>
 				</div>
 			</section>
-		</>
 	}
 }

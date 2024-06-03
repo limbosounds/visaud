@@ -5,11 +5,12 @@ import "styles/views/editor/components/scene/components"
 
 import Scene from "stores/Scene"
 
-import { ICWaveform } from "models/editor/components/Waveform"
-import { IEditorComponent } from "models/editor/components"
+import { EditorComponentType, IEditorComponent } from "models/editor/components"
 
 import SmallButton from "components/Buttons/Small"
-import EditorComponentWaveform from "./Waveform"
+import EditorComponentWaveformBasic from "./Waveforms/Basic"
+import ContextMenu from "components/ContextMenu"
+import EditorComponentWaveformCircle from "./Waveforms/Circle"
 
 export interface EditorComponentsProps {
 
@@ -27,8 +28,14 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 		component: IEditorComponent,
 	) => {
 		switch (component.type) {
-			case "waveform":
-				return <EditorComponentWaveform model={component as ICWaveform} />
+			case "waveform:basic":
+				return <EditorComponentWaveformBasic
+					model={component}
+				/>
+			case "waveform:circle":
+				return <EditorComponentWaveformCircle
+					model={component}
+				/>
 			default:
 				return null
 		}
@@ -75,15 +82,40 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 				})}
 			</div>
 
-			<div
-				className="u-add-button"
-				onClick={() => Scene.editor.addComponent("waveform")}
+			<ContextMenu
+				content={({ close }) => {
+					return <ul className="u-list">
+						{([
+							"waveform:basic",
+							"waveform:circle"
+						] as EditorComponentType[]).map(item => {
+							return <li
+								key={item}
+								onClick={() => {
+									Scene.editor.addComponent(item)
+									close()
+								}}
+							>
+								<span>
+									{item.split(":").join(" ")}
+								</span>
+							</li>
+						})}
+					</ul>
+				}}
 			>
-				<i className="fas fa-plus" />
-				<span>
-					Add component
-				</span>
-			</div>
+				{({ handlers }) => {
+					return <div
+							className="u-add-button"
+							onClick={handlers.click}
+						>
+							<i className="fas fa-plus" />
+							<span>
+								Add component
+							</span>
+						</div>
+				}}
+			</ContextMenu>
 		</>
 	}
 
@@ -104,7 +136,7 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 					{selectedComponent.type}
 				</span>
 			</h1>
-			<div className="ec-component-manager u-paper">
+			<div className="ec-component-manager">
 				{this.getComponentManager(selectedComponent)}
 			</div>
 		</>

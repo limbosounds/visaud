@@ -1,22 +1,22 @@
+import { reaction } from "mobx"
 import { types, Instance, SnapshotIn, addDisposer } from "mobx-state-tree"
 
+import Scene from "stores/Scene"
 import SoundProcessor from "stores/Sound/Processor"
 
-import { ComponentDimensionsModel, renderBounds } from "./Basic"
+import { ComponentDimensionsModel, renderBounds } from "../Basic"
 import { ColorModel } from "models/primitives/Color"
 import { makeRodedNumberModel } from "models/primitives/roded/Number"
-import { reaction } from "mobx"
-import Scene from "stores/Scene"
 
-export interface ICWaveform
-extends Instance<typeof CWaveformModel> {}
-export interface ICWaveformSnapshotIn
-extends SnapshotIn<typeof CWaveformModel> {}
+export interface ICWaveformBasic
+extends Instance<typeof CWaveformBasicModel> {}
+export interface ICWaveformBasicSnapshotIn
+extends SnapshotIn<typeof CWaveformBasicModel> {}
 
-export const CWaveformModel = types
-	.model("Component::Waveform", {
+export const CWaveformBasicModel = types
+	.model("Component::Waveform.Basic", {
 		id: types.identifier,
-		type: types.literal("waveform"),
+		type: types.literal("waveform:basic"),
 		dimensions: ComponentDimensionsModel,
 		color: ColorModel,
 		weight: makeRodedNumberModel("int", 1, 100)
@@ -42,13 +42,11 @@ export const CWaveformModel = types
 
 				const sliceWidth = width / bufferLength
 				let x = self.dimensions.left
+				context.moveTo(x, self.dimensions.top + halfHeight)
 				for (let i = 0; i < bufferLength; i++) {
 					const v = waveform[i] * halfHeight
 					const y = self.dimensions.top + halfHeight + v
-					if (i == 0)
-						context.moveTo(x, y)
-					else
-						context.lineTo(x, y)
+					context.lineTo(x, y)
 					x += sliceWidth
 				}
 

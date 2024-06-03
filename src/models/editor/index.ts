@@ -6,9 +6,10 @@ import Scene from "stores/Scene"
 import { defaultColor } from "models/primitives/Color"
 import { ReactorModel } from "models/reactor"
 
-import { CWaveformModel } from "./components/Waveform"
+import { CWaveformBasicModel } from "./components/waveforms/Basic"
 import { defaultDimensions } from "./components/Basic"
 import { EditorComponentModel, EditorComponentType, IEditorComponent } from "./components"
+import { CWaveformCircleModel } from "./components/waveforms/Circle"
 
 export interface IEditor
 extends Instance<typeof EditorModel> {}
@@ -37,15 +38,25 @@ export const EditorModel = types
 				type: EditorComponentType,
 			) => {
 				switch (type) {
-					case "waveform":
-						self.components.push(CWaveformModel.create({
+					case "waveform:basic":
+						self.components.push(CWaveformBasicModel.create({
 							id: uuid(),
-							type: "waveform",
+							type: "waveform:basic",
 							color: defaultColor(),
 							dimensions: defaultDimensions(120, 80),
 							weight: { value: "1" },
 						}))
-					break
+						break
+					case "waveform:circle":
+						self.components.push(CWaveformCircleModel.create({
+							id: uuid(),
+							type: "waveform:circle",
+							color: defaultColor(),
+							dimensions: defaultDimensions(240, 240),
+							weight: { value: "1" },
+							thickness: { value: "10" },
+						}))
+						break
 				}
 				Scene.updateFrame()
 			},

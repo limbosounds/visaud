@@ -1,0 +1,24 @@
+@import "styles/vars"
+
+div.c-context-menu-background
+	+pos(fixed, 0, 0, 0, 0)
+	background: rgba($colorDark, .12)
+	z-index: 99998
+	backdrop-filter: blur(3px)
+
+div.c-context-menu
+	+pos(fixed, 0, 0, 0, 0)
+	z-index: 99999
+	overflow: hidden
+
+	div.cm-content-wrapper
+		position: absolute
+		overflow-x: hidden
+		overflow-y: scroll
+		+scrollbar(white, 0, .5)
+		background: $colorGrey
+		color: $colorDark
+		border-radius: 6px
+		box-shadow: 0 6px 18px rgba($colorDark, .24)
+		max-height: 480px
+		max-width: 320px
