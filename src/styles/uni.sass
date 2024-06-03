@@ -21,3 +21,29 @@
 	+singleRunAnimation(highlight, 840ms, ease-in-out)
 	animation-iteration-count: infinite
 	animation-direction: alternate
+
+.u-add-button
+	padding: 30px
+	background: rgba($colorDark, .12)
+	display: flex
+	align-items: center
+	justify-content: center
+	text-align: center
+	border: 2px dashed rgba(white, .12)
+	border-radius: 3px
+	cursor: pointer
+	+transition
+
+	&.column
+		flex-direction: column
+		+childSpaceBottom(10px)
+		
+	&:not(.column)
+		+childSpaceRight(10px)
+
+	&:hover
+		border-color: white
+		background: rgba($colorDark, .24)
+
+	span
+		font-weight: 700

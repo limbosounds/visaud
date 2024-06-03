@@ -145,16 +145,6 @@ extends React.Component<KnobProps<R>, KnobState> {
 							} as React.CSSProperties}
 							onMouseDown={this.handleMouseDown}
 						/>
-						{/* {rodable && (model as IRodedNumber).rode &&
-							<div
-								className="thumb-handle rode"
-								style={{
-									"--rotate": `${progress * (135 * 2) - 135}deg`
-								} as React.CSSProperties}
-							>
-
-							</div>
-						} */}
 					</div>
 					<div className="ri-value">
 						{rodable

@@ -107,7 +107,7 @@ extends React.Component<ReactorViewProps, ReactorViewState> {
 							</section>
 						})}
 						<div
-							className="add-rode"
+							className="u-add-button column"
 							onClick={() => reactor.addRode("peak")}
 						>
 							<i className="fas fa-plus" />

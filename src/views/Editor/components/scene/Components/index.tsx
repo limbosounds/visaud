@@ -76,7 +76,7 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 			</div>
 
 			<div
-				className="add-button"
+				className="u-add-button"
 				onClick={() => Scene.editor.addComponent("waveform")}
 			>
 				<i className="fas fa-plus" />
