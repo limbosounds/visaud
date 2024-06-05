@@ -72,7 +72,7 @@ Bars drawn in a straight line from the left to the right
 - [ ] Gradiental fill
 - [ ] Basic transformations
 - [ ] Independent bar color and opacity based on frequency loudness level
-- [ ] Bar FXs (e. g. )
+- [ ] Bar FXs (e. g. gravity caps)
 - [ ] Alternative style (zig-zag)
 
 #### Circular
