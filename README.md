@@ -57,7 +57,7 @@ Set of vertical lines representing loudness of specific frequency for a specific
 Bars drawn in a straight line from the left to the right
 
 ##### Basic
-- [ ] Basic render
+- [x] Basic render
 - [ ] Size settings
 - [ ] Positioning on the scene
 - [ ] Direction settings

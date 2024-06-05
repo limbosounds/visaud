@@ -87,7 +87,8 @@ extends React.Component<EditorComponentsProps, EditorComponentsState> {
 					return <ul className="u-list">
 						{([
 							"waveform:basic",
-							"waveform:circle"
+							"waveform:circle",
+							"freq:basic",
 						] as EditorComponentType[]).map(item => {
 							return <li
 								key={item}

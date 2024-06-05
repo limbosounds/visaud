@@ -12,8 +12,8 @@ class SoundProcessorStore {
 		= new Float32Array(1)
 
 	private _freq
-		: Float32Array
-		= new Float32Array(1)
+		: Uint8Array
+		= new Uint8Array(1)
 
 	get context() {
 		return this._context
@@ -52,7 +52,7 @@ class SoundProcessorStore {
 		source.connect(this._context.destination)
 
 		this._waveform = new Float32Array(this._analyser.fftSize)
-		this._freq = new Float32Array(this._analyser.fftSize)
+		this._freq = new Uint8Array(this._analyser.fftSize)
 	}
 
 	updateWaveform = () => {
@@ -60,7 +60,7 @@ class SoundProcessorStore {
 	}
 
 	updateFreq = () => {
-		this._analyser?.getFloatFrequencyData(this._freq)
+		this._analyser?.getByteFrequencyData(this._freq)
 	}
 }
 
