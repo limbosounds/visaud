@@ -23,7 +23,9 @@ export const CFreqBasicModel = types
 				isHighlighted: boolean,
 			) => {
 				const { freq } = Processor
-				const audibleLength = bufferLength / 2
+				
+				// TODO detect based on sample rate
+				const audibleLength = bufferLength
 
 				context.save()
 				context.fillStyle = "white"
@@ -42,7 +44,7 @@ export const CFreqBasicModel = types
 				context.restore()
 
 				if (isHighlighted)
-						renderBounds(context, self.dimensions)
+					renderBounds(context, self.dimensions)
 			}
 		}
 	})

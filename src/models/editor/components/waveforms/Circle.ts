@@ -76,6 +76,10 @@ export const CWaveformCircleModel = types
 					() => self.weight.numeric,
 					() => Scene.updateFrame()
 				))
+				addDisposer(self, reaction(
+					() => self.thickness.numeric,
+					() => Scene.updateFrame()
+				))
 			}
 		}
 	})

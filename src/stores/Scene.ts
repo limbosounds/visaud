@@ -33,7 +33,7 @@ class SceneStore {
 		this.editor.components.forEach(component => {
 			component.render(
 				this.context,
-				SoundProcessor.analyser.fftSize,
+				SoundProcessor.analyser.frequencyBinCount,
 				this.editor.isComponentSelected(component.id),
 			)
 		})
