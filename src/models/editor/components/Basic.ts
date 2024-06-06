@@ -183,10 +183,12 @@ export const ComponentDimensionsModel = types
 export const defaultDimensions = (
 	width: number,
 	height: number,
+	x: number = 0,
+	y: number = 0,
 ): IComponentDimensionsSnapshotIn => {
 	return {
-		x: { value: "0" },
-		y: { value: "0" },
+		x: { value: x.toString() },
+		y: { value: y.toString() },
 		width: { value: width.toString() },
 		height: { value: height.toString() },
 		anchoring: {

@@ -24,15 +24,20 @@ export const CFreqBasicModel = types
 			) => {
 				const { freq } = Processor
 				
-				// TODO detect based on sample rate
-				const audibleLength = bufferLength
+				const contextFreqRange = [0, Processor.context.sampleRate / 2]
+				// TODO customizable
+				const [ minFreq, maxFreq ] = [20, 20000]
+				const freqPerBar = contextFreqRange[1] / bufferLength
+
+				const audibleLength = Math.floor(bufferLength * maxFreq / contextFreqRange[1])
+				const startIndex = Math.floor(minFreq / freqPerBar)
 
 				context.save()
 				context.fillStyle = "white"
 				const { width, height, top, left } = self.dimensions
 				const rw = width.numeric / audibleLength
 
-				for (let i = 0; i < audibleLength; i++) {
+				for (let i = startIndex; i < audibleLength; i++) {
 					const rh = height.numeric * (freq[i] / 255)
 					context.fillRect(
 						left + rw * i,

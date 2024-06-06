@@ -47,7 +47,6 @@ class SoundProcessorStore {
 			this._context = new AudioContext()
 			this._analyser = this._context.createAnalyser()
 		}
-		console.log(this.context.sampleRate, this.analyser.fftSize, this.analyser.frequencyBinCount)
 		const source = this._context.createMediaElementSource(element)
 		source.connect(this._analyser)
 		source.connect(this._context.destination)

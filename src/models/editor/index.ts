@@ -63,7 +63,7 @@ export const EditorModel = types
 						self.components.push(CFreqBasicModel.create({
 							id: uuid(),
 							type: "freq:basic",
-							dimensions: defaultDimensions(1000, 500),
+							dimensions: defaultDimensions(1000, 240, 120, 240),
 							count: {
 								value: Processor.analyser.frequencyBinCount.toString()
 							},
