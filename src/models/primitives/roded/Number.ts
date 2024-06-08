@@ -29,7 +29,7 @@ export const makeRodedNumberModel = (
 
 				switch (self.rode.type) {
 					case "peak":
-						return self.rode.getPeakedValue(self.numeric, min, max)
+						return self.rode.getPeakedValue(self.numeric, self.min!, self.max!)
 				}
 			}
 		}

@@ -2,6 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 
 import "@sounds.of.limbo/extensions/dist/Number"
+import "typings"
 
 import App from "App"
 

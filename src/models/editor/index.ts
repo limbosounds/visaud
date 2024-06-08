@@ -11,7 +11,6 @@ import { defaultDimensions } from "./components/Basic"
 import { EditorComponentModel, EditorComponentType, IEditorComponent } from "./components"
 import { CWaveformCircleModel } from "./components/waveforms/Circle"
 import { CFreqBasicModel } from "./components/freqs/Basic"
-import Processor from "stores/Sound/Processor"
 
 export interface IEditor
 extends Instance<typeof EditorModel> {}
@@ -64,9 +63,6 @@ export const EditorModel = types
 							id: uuid(),
 							type: "freq:basic",
 							dimensions: defaultDimensions(1000, 240, 120, 240),
-							count: {
-								value: Processor.analyser.frequencyBinCount.toString()
-							},
 						}))
 						break
 				}

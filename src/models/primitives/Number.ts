@@ -18,9 +18,16 @@ export const makePlainNumberModel = (
 		.model(`Primitive::Number(${type})`, {
 			value: "",
 		})
+		.volatile(() => {
+			return {
+				min,
+				max,
+			}
+		})
 		.views(self => {
 			return {
 				get numeric(): number {
+					const { min, max } = self
 					const numeric = Number(self.value)
 					if (isNaN(numeric))
 						return min ?? 0

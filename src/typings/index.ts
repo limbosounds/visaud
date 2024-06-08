@@ -1,0 +1,1 @@
+type Turple = [number, number]

@@ -2,6 +2,7 @@ import { types, Instance, SnapshotIn } from "mobx-state-tree"
 import { ComponentDimensionsModel, renderBounds } from "../Basic"
 import { makePlainNumberModel } from "models/primitives/Number"
 import Processor from "stores/Sound/Processor"
+import { makeTwoSidedRangeModel } from "models/complex/ranges/TwoSide"
 
 export interface ICFreqBasic
 extends Instance<typeof CFreqBasicModel> {}
@@ -13,7 +14,19 @@ export const CFreqBasicModel = types
 		id: types.identifier,
 		type: types.literal("freq:basic"),
 		dimensions: ComponentDimensionsModel,
-		count: makePlainNumberModel("int", 128, 1024),
+		freqRange: types.optional(
+			makeTwoSidedRangeModel("float", 20, 20000),
+			{
+				start: { value: "20" },
+				end: { value: "1000" },
+			}
+		),
+		count: types.optional(
+			makePlainNumberModel("int", 128),
+			() => ({
+				value: Processor.analyser.frequencyBinCount.toString(),
+			})
+		),
 	})
 	.actions(self => {
 		return {
@@ -22,34 +35,37 @@ export const CFreqBasicModel = types
 				bufferLength: number,
 				isHighlighted: boolean,
 			) => {
-				const { freq } = Processor
-				
-				const contextFreqRange = [0, Processor.context.sampleRate / 2]
-				// TODO customizable
-				const [ minFreq, maxFreq ] = [20, 20000]
-				const freqPerBar = contextFreqRange[1] / bufferLength
-
-				const audibleLength = Math.floor(bufferLength * maxFreq / contextFreqRange[1])
-				const startIndex = Math.floor(minFreq / freqPerBar)
+				const { width, height, top, left } = self.dimensions
+				const rw = width.numeric / self.count.numeric
 
 				context.save()
-				context.fillStyle = "white"
-				const { width, height, top, left } = self.dimensions
-				const rw = width.numeric / audibleLength
-
-				for (let i = startIndex; i < audibleLength; i++) {
-					const rh = height.numeric * (freq[i] / 255)
+				Processor.strictedFreqRange(
+					bufferLength,
+					self.freqRange.turple,
+					self.count.numeric
+				).forEach((value, i) => {
+					const rel = value / 255
+					context.fillStyle = `rgba(255, 255, 255, ${rel})`
+					const rh = height.numeric * (value / 255)
 					context.fillRect(
 						left + rw * i,
 						top + height.numeric - rh,
 						rw,
 						rh
 					)
-				}
+				})
+
 				context.restore()
 
 				if (isHighlighted)
 					renderBounds(context, self.dimensions)
+			}
+		}
+	})
+	.actions(self => {
+		return {
+			afterCreate: () => {
+				self.count.max = Processor.analyser.frequencyBinCount
 			}
 		}
 	})

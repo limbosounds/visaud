@@ -1,4 +1,5 @@
 import {} from "mobx"
+import { interpolateLinearly } from "utils/array"
 
 class SoundProcessorStore {
 	private _context
@@ -14,6 +15,10 @@ class SoundProcessorStore {
 	private _freq
 		: Uint8Array
 		= new Uint8Array(1)
+
+	freqRange
+		: Turple
+		= [0, 1]
 
 	get context() {
 		return this._context
@@ -53,6 +58,11 @@ class SoundProcessorStore {
 
 		this._waveform = new Float32Array(this._analyser.fftSize)
 		this._freq = new Uint8Array(this._analyser.fftSize)
+
+		this.freqRange = [
+			0,
+			this._context.sampleRate / 2,
+		]
 	}
 
 	updateWaveform = () => {
@@ -61,6 +71,23 @@ class SoundProcessorStore {
 
 	updateFreq = () => {
 		this._analyser?.getByteFrequencyData(this._freq)
+	}
+
+	strictedFreqRange = (
+		bufferLength: number,
+		targetFreqRange: Turple,
+		barsCount: number,
+	) => {
+		const [ minFreq, maxFreq ] = targetFreqRange
+		const freqPerBar = this.freqRange[1] / bufferLength
+
+		const audibleLength = Math.floor(bufferLength * maxFreq / this.freqRange[1])
+		const startIndex = Math.floor(minFreq / freqPerBar)
+
+		return interpolateLinearly(
+			this.freq.slice(startIndex, audibleLength),
+			barsCount,
+		)
 	}
 }
 
